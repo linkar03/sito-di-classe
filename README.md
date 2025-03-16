@@ -11,7 +11,7 @@ Come collaborare
 - Ciascuno di noi puo lavorare sul proprio branch
 - Creare quindi una propria pagina personale ex: studenti/nome.html
 - Aprire pull request per aggiungere o modificare contenuti
-- I codici ce li revisioniamo a vicenda prima di fare merge
+- Ho scritto un workflow per correggere errori semplici, ma i codici ce li revisioniamo comunque a vicenda prima di fare merge
 
 Regole branch
 
