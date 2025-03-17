@@ -22,3 +22,5 @@ Regole branch
 
 Piano piano aggiungerò note sul readme. Ho intenzione di creare due directory, una per pagine statiche per applicare le cose che in teoria gia sappiamo
 Un'altra per sperimentare con cose nuove che faremo, ad esempio prossimamente React(framework piu moderno)
+
+Test
