@@ -1,3 +1,4 @@
+
 // Esempio di codice JavaScript per testare ESLint
 
 function esempio() {
