@@ -1,12 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciao</title>
+    <title>Pagine Dinamiche</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pagina-square {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+        }
+
+        .pagina-square:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Ciao, mondo!</h1>
+    <h1>Pagine Disponibili</h1>
+    <div class="container" id="container"></div>
+	
+	<script src="Pagine/elenco.js"></script>
+
+    <script>
+
+
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function generatePageSquares() {
+            const container = document.getElementById('container');
+            const numToShow = getRandomNumber(5, 20);
+            const shuffledPages = shuffleArray([...pages]).slice(0, numToShow);
+
+            shuffledPages.forEach(page => {
+                const link = document.createElement('a');
+                link.className = 'pagina-square';
+                link.href = page;
+                link.textContent = page.split('/').pop().replace('.html', '');
+                
+                // Aggiungi un'immagine se vuoi (crea una cartella 'images' con le thumbnail)
+                // const img = document.createElement('img');
+                // img.src = `images/${page.replace('.html', '.png')}`;
+                // link.appendChild(img);
+
+                container.appendChild(link);
+            });
+        }
+
+        // Genera i quadrati al caricamento della pagina
+        window.onload = generatePageSquares;
+    </script>
 </body>
 </html>
-
