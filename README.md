@@ -13,7 +13,7 @@ Come collaborare
 - Creare quindi una propria pagina personale ex: nome.html
 - Aprire pull request per aggiungere o modificare contenuti
 - I codici ce li revisioniamo a vicenda prima di fare merge, ho incluso per sperimentare una routine di controllo che dovrebbe impedire in automatico i push
-  caso di errori comuni e altre cosette che potete leggere nel file. (ancora work in progress)
+  caso di errori comuni e altre cosette che potete leggere nel file .mjs tra i commenti (ancora work in progress)
 
 Regole branch
 
