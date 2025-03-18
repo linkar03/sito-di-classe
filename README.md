@@ -4,7 +4,7 @@ Descrizione
 
 Ciascuno di noi puo partecipare e creare una pagina dove semplicemente parlare di se stesso e dei propri hobby
 o volendo anche creare cose piu interessanti e sbizzarrirsi un po'.
-L'obiettivo è fare qualcosa insieme, divertirsi e sperimentare con Git e DevOps
+L'obiettivo è fare qualcosa insieme, divertirsi e sperimentare con Git e concetti DevOps
 
 Come collaborare
 
