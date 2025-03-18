@@ -18,7 +18,7 @@ Come collaborare
 Regole branch
 
 - Main: sito in produzione. Qua si mettono le cose che sono pronte in maniera definitiva
-- Sviluppo: qua rilasciamo le cose da revisionare prima di mandare live
+- Sviluppo: qua rilasciamo le cose da revisionare prima di mandare live (devo ancora sistemare le regole qui, quindi lavoriamo ciascuno sul proprio branch personale e poi pushamo da li a main)
 
 Piano piano aggiungerò note sul readme. Ho intenzione di creare due directory, una per pagine statiche per applicare le cose che in teoria gia sappiamo
 Un'altra per sperimentare con cose nuove che faremo, ad esempio prossimamente React(framework piu moderno).
