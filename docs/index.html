@@ -7,6 +7,10 @@
     <link rel="apple-touch-icon" href="Risorse/logo.png"> 
 	<!-- Per dispositivi Apple -->
     <title>Sito di classe</title>
+	
+	<link rel="stylesheet" href="Figure js/Cubo.css">
+	<link rel="stylesheet" href="Figure js/Slide.css">
+	
     <style>
         :root {
             --cube-font: Arial, sans-serif;
@@ -19,60 +23,31 @@
             user-select: none;
         }
 		
-        #cubeContainer {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-        }
+		
 
-        .cube {
-		    pointer-events: auto;
-            position: absolute;
-            cursor: pointer;
-            transition: transform 0.2s;
-            transform-style: preserve-3d;
-        }
-
-        .face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .face-image {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .face-text {
-            font-family: var(--cube-font);
-            color: var(--cube-text-color);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            text-align: center;
-            font-size: 1.2em;
-        }
-
-        /* Posizionamento facce */
-        .front { transform: translateZ(calc(var(--size) / 2)); }
-        .back { transform: translateZ(calc(var(--size) / -2)) rotateX(180deg); }
-        .right { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
-        .left { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
-        .top { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
-        .bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
-    </style>
+	</style>
 	</head>
 	<body>
     <div id="cubeContainer"></div>
     <script src="script.js"></script>
 	<script src="Figure js/Cubo.js"></script>
+	<script src="Figure js/Slide.js"></script>
+	
     <script>
         
+		const para = new Parallelepiped({
+			width: 20,   // 20% della viewport
+			height: 30,  // 30% della viewport
+			depth: 10,   // 10% della viewport
+			color: 'rgba(52, 152, 219, 0.8)',
+			customFace: {
+				face: 'front',
+				html: '<h2 style="color:black">Contenuto</h2><p style="color:black">Testo personalizzato</p>'
+			},
+		});
+
+		document.body.appendChild(para.element);
+
         // Inizializzazione cubi
         const cubeContainer = document.getElementById('cubeContainer');
         const cubes = pages.map(config => new Cube({
