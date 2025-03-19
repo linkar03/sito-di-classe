@@ -18,5 +18,14 @@ const pages = [
         250,
         -1.5,
         1.1
+    ],
+    [
+        "Alessio", 
+        "Pagine/Alessio.html",
+        "Risorse/immagine_profilo_ale.jpg",
+        "#FC58A8",
+        250,
+        -1.5,
+        1.1
     ]
 ];
