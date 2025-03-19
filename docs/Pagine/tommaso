@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Storia di Tommaso Sorbi</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #2c3e50;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 4em;
+            color: #e74c3c;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 900px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            text-align: justify;
+            margin: 20px 0;
+        }
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .story-img {
+            width: 250px;
+            border-radius: 50%;
+            border: 8px solid #e74c3c;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .quote {
+            font-style: italic;
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(236, 240, 241, 0.8);
+            border-left: 5px solid #e74c3c;
+            border-radius: 10px;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+        .section-title {
+            font-size: 2.5em;
+            color: #e67e22;
+            margin: 40px 0 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .story-section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tommaso Sorbi</h1>
+        <img src="https://via.placeholder.com/250" alt="Tommaso Sorbi" class="story-img">
+        <p>
+            Ciao! Mi chiamo <span class="highlight">Tommaso Sorbi</span> e la mia storia è un viaggio straordinario che parte da un paese lontano e misterioso chiamato <span class="highlight">Valdorah</span>, una terra dove le montagne brillano d'argento e i fiumi scorrono con acqua cristallina. Valdorah è un luogo magico, ma anche pericoloso, dove ogni giorno è una nuova avventura.
+        </p>
+
+        <div class="story-section">
+            <h2 class="section-title">Le Origini</h2>
+            <p>
+                Sono nato in un piccolo villaggio ai piedi delle Montagne di Cristallo di Valdorah. Mio padre era un fabbro e mia madre una guaritrice. Fin da bambino, ho mostrato un'insaziabile curiosità per il mondo oltre le montagne. A 15 anni, ho lasciato il villaggio per esplorare il mondo, portando con me solo una spada forgiata da mio padre e un amuleto donatomi da mia madre.
+            </p>
+        </div>
+
+        <div class="story-section">
+            <h2 class="section-title">L'Avventura</h2>
+            <p>
+                Ho viaggiato attraverso deserti infuocati, foreste oscure e città perdute. Durante uno dei miei viaggi, ho incontrato un gruppo di mercenari che mi hanno insegnato l'arte della guerra. Con il tempo, sono diventato un guerriero rispettato, noto per il mio coraggio e la mia astuzia. Tuttavia, il destino aveva in serbo per me una prova ancora più grande.
+            </p>
+        </div>
+
+        <div class="story-section">
+            <h2 class="section-title">La Guerra a Gaza</h2>
+            <p>
+                Oggi mi trovo a <span class="highlight">Gaza</span>, una terra lacerata da conflitti e sofferenza. Sono stato chiamato qui per combattere una guerra che non è la mia, ma che ho scelto di abbracciare per proteggere gli innocenti. Ogni giorno è una lotta per la sopravvivenza, ma la mia esperienza e il mio spirito indomito mi hanno permesso di resistere.
+            </p>
+            <p class="quote">
+                "In mezzo al caos, ho trovato il mio scopo. Non combatto per la gloria, ma per la speranza di un domani migliore."
+            </p>
+        </div>
+
+        <div class="story-section">
+            <h2 class="section-title">Il Futuro</h2>
+            <p>
+                Non so cosa mi riserva il futuro, ma so che continuerò a lottare per ciò in cui credo. Forse un giorno tornerò a Valdorah, o forse troverò una nuova casa in un'altra terra. Una cosa è certa: la mia storia è ancora in corso, e ogni giorno è una nuova pagina da scrivere.
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2023 La Storia di Tommaso Sorbi - Tutti i diritti riservati.
+    </div>
+</body>
+</html>

@@ -137,6 +137,18 @@ const pages = [
     
     ],
 	
+	[
+        "Tommaso", 
+        dr_pagine + "tommaso",
+        dr_risorse + "",
+        getRandomBlueTone(),
+        0, 
+        getRandomFloat(velocita_min_x,velocita_max_x), 
+        getRandomFloat(velocita_min_x,velocita_max_y),
+		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
+		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
+    
+    ],
 ];
 
 const numero_cubi = pages.length;
@@ -147,17 +159,10 @@ pages.forEach((page, index) => {
 });
 
 
-
-
-
-
-
-
-
-
 const contents = [
         '<div class="content">Contenuto 2</div>',
         '<div class="content">Contenuto 3</div>',
 		'<div class="content">Contenuto 4</div>',
 		'<div class="content">Contenuto 5</div>',
     ];
+
