@@ -127,7 +127,7 @@ const pages = [
 	[
         "Tommaso", 
         dr_pagine + "Elsorbi/tommaso.html",
-        dr_risorse + "",
+        dr_risorse + "OIP.jpg",
         getRandomBlueTone(),
         0, 
         getRandomFloat(velocita_min_x,velocita_max_x), 
