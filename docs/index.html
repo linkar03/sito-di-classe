@@ -3,93 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagine Dinamiche</title>
+	<link rel="icon" type="logo" href="Risorse/logo.png">
+    <link rel="apple-touch-icon" href="Risorse/logo.png"> 
+	<!-- Per dispositivi Apple -->
+    <title>Sito di classe</title>
     <style>
+        :root {
+            --cube-font: Arial, sans-serif;
+            --cube-text-color: #ffffff;
+        }
+		
         body {
             margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            overflow: hidden;
+            user-select: none;
+        }
+		
+        #cubeContainer {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
         }
 
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .cube {
+		    pointer-events: auto;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.2s;
+            transform-style: preserve-3d;
         }
 
-        .pagina-square {
-            background-color: #ffffff;
-            border-radius: 10px;
-            padding: 20px;
-            aspect-ratio: 1/1;
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-            color: #333;
-            text-align: center;
         }
 
-        .pagina-square:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .face-image {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        h1 {
+        .face-text {
+            font-family: var(--cube-font);
+            color: var(--cube-text-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             text-align: center;
-            margin-bottom: 40px;
-            color: #333;
+            font-size: 1.2em;
         }
+
+        /* Posizionamento facce */
+        .front { transform: translateZ(calc(var(--size) / 2)); }
+        .back { transform: translateZ(calc(var(--size) / -2)) rotateX(180deg); }
+        .right { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+        .left { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
+        .top { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+        .bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
     </style>
-</head>
-<body>
-    <h1>Pagine Disponibili</h1>
-    <div class="container" id="container"></div>
-	
-	<script src="script.js"></script>
-
+	</head>
+	<body>
+    <div id="cubeContainer"></div>
+    <script src="script.js"></script>
     <script>
+        class Cube {
+			constructor(config) {
+				this.element = document.createElement('div');
+				this.element.className = 'cube';
+				Object.assign(this, config);
+				
+				this.size = config.size || 100;
+				this.element.style.setProperty('--size', `${this.size}px`);
+				this.element.style.width = `${this.size}px`;
+				this.element.style.height = `${this.size}px`;
 
+				this.x = Math.random() * (window.innerWidth - this.size);
+				this.y = Math.random() * (window.innerHeight - this.size);
+				this.init();
 
-        function getRandomNumber(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+				// RIMUOVI QUESTO EVENT LISTENER DUPLICATO
+				// this.element.addEventListener('click', (e) => {
+				//    e.preventDefault();
+				//    window.location.href = pages[1][1];
+				// });
+			}
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+			init() {
+				const faces = [
+					{ class: 'front', type: 'image' },
+					{ class: 'back', type: 'image' },
+					{ class: 'right', type: 'text' },
+					{ class: 'left', type: 'text' },
+					{ class: 'top', type: 'text' },
+					{ class: 'bottom', type: 'text' }
+				];
+
+				faces.forEach(({ class: faceClass, type }) => {
+					const face = document.createElement('div');
+					face.className = `face ${faceClass}`;
+
+					if(type === 'image' && this.image) {
+						face.classList.add('face-image');
+						face.style.backgroundImage = `url('${this.image}')`;} else {
+						face.style.backgroundColor = this.color;
+						
+						if(type === 'text') {
+							const textDiv = document.createElement('div');
+							textDiv.className = 'face-text';
+							textDiv.innerHTML = this.name;
+							face.appendChild(textDiv);
+						}
+					}
+
+					this.element.appendChild(face);
+				});
+
+				this.element.addEventListener('click', (e) => {
+						e.preventDefault();
+						window.location.href = this.link;
+				});
             }
-            return array;
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if(this.x <= 0 || this.x >= window.innerWidth - this.size) this.speedX *= -1;
+                if(this.y <= 0 || this.y >= window.innerHeight - this.size) this.speedY *= -1;
+
+                this.element.style.transform = `
+                    translate(${this.x}px, ${this.y}px)
+                    rotateX(${this.rotationX}deg)
+                    rotateY(${this.rotationY}deg)`;
+
+                this.rotationX += 0.5;
+                this.rotationY += 0.5;
+            }
         }
 
-        function generatePageSquares() {
-            const container = document.getElementById('container');
-            const numToShow = getRandomNumber(5, 20);
-            const shuffledPages = shuffleArray([...pages]).slice(0, numToShow);
+        // Inizializzazione cubi
+        const cubeContainer = document.getElementById('cubeContainer');
+        const cubes = pages.map(config => new Cube({
+            name: config[0],
+            link: config[1],
+            image: config[2],
+            color: config[3],
+            size: config[4],
+            speedX: config[5],
+            speedY: config[6],
+            rotationX: Math.random() * 360,
+            rotationY: Math.random() * 360
+        }));
 
-            shuffledPages.forEach(page => {
-                const link = document.createElement('a');
-                link.className = 'pagina-square';
-                link.href = page;
-                link.textContent = page.split('/').pop().replace('.html', '');
-                
-                // Aggiungi un'immagine se vuoi (crea una cartella 'images' con le thumbnail)
-                // const img = document.createElement('img');
-                // img.src = `images/${page.replace('.html', '.png')}`;
-                // link.appendChild(img);
+        cubes.forEach(cube => cubeContainer.appendChild(cube.element));
 
-                container.appendChild(link);
-            });
+        // Animazione
+        function animate() {
+            cubes.forEach(cube => cube.update());
+            requestAnimationFrame(animate);
         }
-
-        // Genera i quadrati al caricamento della pagina
-        window.onload = generatePageSquares;
+        animate();
     </script>
 </body>
 </html>
