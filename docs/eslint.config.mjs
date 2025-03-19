@@ -28,10 +28,10 @@ export default [
       "no-alert": "warn", //alert possono risultare fastidiose e possono prevenire controllo appropriato interfaccia in situazioni in cui e' necessariamente richiesto
 
       // Leggibilità
-      "indent": ["error", 2],              // 2 spazi
-      "quotes": ["error", "single"],       // virgolette singole
-      "brace-style": ["error", "1tbs"],    // stile graffe coerente
-      "comma-dangle": ["error", "never"]   // niente virgole finali
+      "indent": ["warn", 2],              // 2 spazi
+      "quotes": ["warn", "single"],       // virgolette singole
+      "brace-style": ["warn", "1tbs"],    // stile graffe coerente
+      "comma-dangle": ["warn", "never"]   // niente virgole finali
     }
   },
   {
