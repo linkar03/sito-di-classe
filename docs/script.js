@@ -28,8 +28,8 @@ function getRandomBlueTone() {
 //------ VARIABILI GLOBALI ---------------
 //----------------------------------------
 
-var dimensione_min = 300;
-var dimensione_max = 150;
+var dimensione_min = 120;
+var dimensione_max = 180;
 
 var velocita_min_x = -5;
 var velocita_max_x = 5;
