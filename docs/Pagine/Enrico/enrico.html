@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Curriculum di Enrico Del Piede - L'Eroe Moderno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        /* Aggiunti stili per i link */
+        a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        /* Resto dello stile invariato */
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background: #f0e6d2;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        header {
+            text-align: center;
+            animation: bounceIn 2s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translateY(-100px); opacity: 0; }
+            60% { transform: translateY(20px); }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Luckiest Guy', cursive;
+            color: #e74c3c;
+            font-size: 3.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 10px 0;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #3498db;
+            margin: 20px auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            animation: slideIn 1s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: scale(1.02);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        h2 {
+            color: #2ecc71;
+            font-family: 'Luckiest Guy', cursive;
+            border-bottom: 3px dashed #3498db;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .warrior-badge {
+            width: 100px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.3;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Enrico Del Piede</h1>
+            <img src="../../Risorse/edp.jpg" class="profile-img" alt="Foto di Enrico">
+            <h2>"Il Liberatore di Termosifoni Volanti"</h2>
+        </header>
+
+        <a href="esperienze.html">
+            <section>
+                <h2>Esperienze Eroiche</h2>
+                <ul>
+                    <li><a href="encomioAlbania.html">🎖 Liberazione dell'Albania dal comunismo (con un colpo solo)</a></li>
+                    <li><a href="attestatoTiroCang.html">🦘 Campione di Tiro al Canguro Messicano (edizione 1999)</a></li>
+                    <li><a href="lancioTerm.html">🏆 Record mondiale lancio termosifone (1.6km - ancora da battere)</a></li>
+                    <li><a href="ricercaMegal.html">🦈 Ricercatore capo del Megalodone Arizona Lab (2010-2015)</a></li>
+                    <li><a href="kosovo.html">🛡 Comandante nella Guerra del Kosovo (settore gelaterie)</a></li>
+                </ul>
+            </section>
+        </a>
+
+       
+            <section>
+                <h2>Super Poteri</h2>
+                <ul>
+                    <li><a href="fTermoN.html">💪 Forza termo-nucleare</a></li>
+                    <li><a href="precisione.html">🎯 Precisione millimetrica</a></li>
+                    <li><a href="strategia.html">🧠 Strategie militari (specialità invernali)</a></li>
+                    <li><a href="addestCanguri.html">🐊 Addestramento canguri da combattimento</li>
+                </ul>
+            </section>
+        
+
+        <a href="certificazioni.html">
+            <section>
+                <h2>Certificazioni</h2>
+                <ul>
+                    <li><a href="lancioTerm.html">🏅 Licenza di lancio oggetti pesanti (Federazione Termica Internazionale)</a></li>
+                    <li><a href="ricercaMegal.html">📜 Diploma in Archeologia Preistorica Marina</a></li>
+                    <li><a href="encomioCucina.html">🎖 Medaglia d'Onore al Valor Culinario (Operazione Pizza in Trincea)</a></li>
+                </ul>
+            </section>
+        </a>
+    </div>
+
+    <img src="https://via.placeholder.com/100" class="warrior-badge" alt="Medaglia">
+</body>
+</html>
