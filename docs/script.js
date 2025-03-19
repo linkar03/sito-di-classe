@@ -3,7 +3,7 @@
 const pages = [
     [
         "Liviu", 
-        "Pagine/Liviu.html",
+        "Pagine/Liviu/Liviu.html",
         "Risorse/immagine_profilo_liviu.png",
         "#FF6B6B",
         250, // dimensione
@@ -12,7 +12,7 @@ const pages = [
     ],
     [
         "Alessandro", 
-        "Pagine/Alessandro.html",
+        "Pagine/Alessandro/Alessandro.html",
         "Risorse/immagine_profilo_ale.jpg",
         "#4ECDC4",
         250,
