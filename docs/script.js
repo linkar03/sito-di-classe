@@ -139,7 +139,7 @@ const pages = [
 	
 	[
         "Tommaso", 
-        dr_pagine + "tommaso",
+        dr_pagine + "ElSorbi/tommaso.html",
         dr_risorse + "",
         getRandomBlueTone(),
         0, 
