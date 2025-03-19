@@ -22,7 +22,7 @@ const pages = [
     [
         "Alessio", 
         "Pagine/Alessio.html",
-        "Risorse/immagine_profilo_ale.jpg",
+        "Risorse/immagine_profilo_alessio.jpg",
         "#FC58A8",
         250,
         -1.5,
