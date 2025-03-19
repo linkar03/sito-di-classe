@@ -1,11 +1,9 @@
 /* eslint-disable no-unused-vars */
-#cubeContainer {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-        }
-
+	#cubeContainer {
+		position: relative;
+		z-index: 2; /* Porta i cubi in primo piano */
+	}
+	
 	.cube {
 		pointer-events: auto;
 		position: absolute;
@@ -13,7 +11,7 @@
 		transition: transform 0.2s;
 		transform-style: preserve-3d;
 	}
-
+	
 	.face {
 		position: absolute;
 		width: 100%;

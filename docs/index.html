@@ -18,13 +18,14 @@
         }
 		
         body {
-            margin: 0;
-            overflow: hidden;
-            user-select: none;
-        }
-		
-		
+			margin: 0;
+			overflow: hidden;
+			user-select: none;
+			position: relative;
+			z-index: 0;
+		}
 
+		
 	</style>
 	</head>
 	<body>
@@ -36,13 +37,13 @@
     <script>
         
 		const para = new Parallelepiped({
-			width: 20,   // 20% della viewport
-			height: 30,  // 30% della viewport
-			depth: 10,   // 10% della viewport
+			width: 100,   // 100% della viewport
+			height: 100,  // 100% della viewport
+			depth: 1,     // Profondità minima per evitare artefatti
 			color: 'rgba(52, 152, 219, 0.8)',
 			customFace: {
 				face: 'front',
-				html: '<h2 style="color:black">Contenuto</h2><p style="color:black">Testo personalizzato</p>'
+				html: '<h1 style="color:black">Clicca un cubo per avere maggiori informazioni</h1>'
 			},
 		});
 
