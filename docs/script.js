@@ -24,12 +24,35 @@ function getRandomBlueTone() {
     return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
 }
 
+function getRandomRedTone() {
+
+	const red = Math.floor(Math.random() * 55) + 200;
+
+	const green = Math.floor(Math.random() * 100);
+	const blue = Math.floor(Math.random() * 100);
+
+	const toHex = (value) => value.toString(16).padStart(2, '0');
+	return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
+	}
+
+function getRandomPurpleTone() {
+
+	const red = Math.floor(Math.random() * 55) + 200;
+
+	const green = Math.floor(Math.random() * 100);
+
+	const blue = Math.floor(Math.random() * 55) + 200;
+
+	const toHex = (value) => value.toString(16).padStart(2, '0');
+	return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
+	}
+
 //----------------------------------------
 //------ VARIABILI GLOBALI ---------------
 //----------------------------------------
 
 var dimensione_min = 120;
-var dimensione_max = 180;
+var dimensione_max = 200;
 
 var velocita_min_x = -5;
 var velocita_max_x = 5;
@@ -55,7 +78,7 @@ const pages = [
         dr_pagine + "Liviu/Liviu.html",						//Pagina link
         dr_risorse + "immagine_profilo_liviu.png",		//Immagine cubo
         getRandomBlueTone(),							//Colore cubo
-        getRandomFloat(dimensione_min,dimensione_max),  //Dimensione
+        0,  //Dimensione
         getRandomFloat(velocita_min_x,velocita_max_x),  //Velocità X
         getRandomFloat(velocita_min_y,velocita_max_y),   //Velocità Y
 		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),	//Velocità rotazione X
@@ -67,7 +90,7 @@ const pages = [
         dr_pagine + "Alessandro/Alessandro.html",
         dr_risorse + "immagine_profilo_ale.jpg",
         getRandomBlueTone(),
-        getRandomFloat(dimensione_min,dimensione_max), 
+        0, 
         getRandomFloat(velocita_min_x,velocita_max_x), 
         getRandomFloat(velocita_min_x,velocita_max_y),
 		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
@@ -80,7 +103,33 @@ const pages = [
         dr_pagine + "Alessio/Alessio.html",
         dr_risorse + "immagine_profilo_alessio.jpg",
         getRandomBlueTone(),
-        getRandomFloat(dimensione_min,dimensione_max), 
+        0, 
+        getRandomFloat(velocita_min_x,velocita_max_x), 
+        getRandomFloat(velocita_min_x,velocita_max_y),
+		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
+		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
+    
+    ],
+	
+	[
+        "Enrico Albania", 
+        dr_pagine + "Enrico/encomioAlbania.html",
+        dr_risorse + "albania.png",
+        getRandomBlueTone(),
+        0, 
+        getRandomFloat(velocita_min_x,velocita_max_x), 
+        getRandomFloat(velocita_min_x,velocita_max_y),
+		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
+		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
+    
+    ],
+	
+	[
+        "Enrico", 
+        dr_pagine + "Enrico/enrico.html",
+        dr_risorse + "edp.jpg",
+        getRandomBlueTone(),
+        0, 
         getRandomFloat(velocita_min_x,velocita_max_x), 
         getRandomFloat(velocita_min_x,velocita_max_y),
 		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
@@ -89,3 +138,10 @@ const pages = [
     ],
 	
 ];
+
+const numero_cubi = pages.length;
+const step_dimensione = (dimensione_max - dimensione_min) / (numero_cubi - 1);
+
+pages.forEach((page, index) => {
+    page[4] = dimensione_min + step_dimensione * index;
+});
