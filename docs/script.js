@@ -112,19 +112,6 @@ const pages = [
     ],
 	
 	[
-        "Enrico Albania", 
-        dr_pagine + "Enrico/encomioAlbania.html",
-        dr_risorse + "albania.png",
-        getRandomBlueTone(),
-        0, 
-        getRandomFloat(velocita_min_x,velocita_max_x), 
-        getRandomFloat(velocita_min_x,velocita_max_y),
-		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
-		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
-    
-    ],
-	
-	[
         "Enrico", 
         dr_pagine + "Enrico/enrico.html",
         dr_risorse + "edp.jpg",
@@ -139,7 +126,7 @@ const pages = [
 	
 	[
         "Tommaso", 
-        dr_pagine + "ElSorbi/tommaso.html",
+        dr_pagine + "Elsorbi/tommaso.html",
         dr_risorse + "",
         getRandomBlueTone(),
         0, 
@@ -160,9 +147,7 @@ pages.forEach((page, index) => {
 
 
 const contents = [
-        '<div class="content">Contenuto 2</div>',
-        '<div class="content">Contenuto 3</div>',
-		'<div class="content">Contenuto 4</div>',
-		'<div class="content">Contenuto 5</div>',
+        '<div class="content"><h1>Benvenuto nel sito</h1></div>',
+        '<div class="content"><h2>Clicca i cubi per maggiori informazioni</h2></div>',
     ];
 
