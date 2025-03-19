@@ -9,7 +9,8 @@ L'obiettivo è fare qualcosa insieme, divertirsi e sperimentare con Git e concet
 Come collaborare
 
 - Ciascuno di noi puo lavorare sul proprio branch
-- Prima di creare una vostra pagina personale, modificate index.html per includere un link alla vostra pagine
+- Create una vostra cartella all'interno della cartella pagine, cosi manteniamo ordine e teniamo la repo organizzata
+- Prima di creare una vostra pagina personale, modificate index.html e script.js per includere un link alla vostra pagine (basta copiare il format gia definito per le altre pagine)
 - Creare quindi una propria pagina personale ex: nome.html
 - Aprire pull request per aggiungere o modificare contenuti
 - I codici ce li revisioniamo a vicenda prima di fare merge, ho incluso per sperimentare una routine di controllo che dovrebbe impedire in automatico i push
