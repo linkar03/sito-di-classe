@@ -157,3 +157,12 @@ const step_dimensione = (dimensione_max - dimensione_min) / (numero_cubi - 1);
 pages.forEach((page, index) => {
     page[4] = dimensione_min + step_dimensione * index;
 });
+
+
+const contents = [
+        '<div class="content">Contenuto 2</div>',
+        '<div class="content">Contenuto 3</div>',
+		'<div class="content">Contenuto 4</div>',
+		'<div class="content">Contenuto 5</div>',
+    ];
+
