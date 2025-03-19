@@ -21,9 +21,30 @@
             margin: 0;
             overflow: hidden;
             user-select: none;
-            background: url('/docs/Risorse/giphy.gif') no-repeat center center fixed;
-            background-size: cover;
+
+            position: relative;
+            z-index: 0;
+            background-image: url('Risorse/giphy.gif');
+            background-size: cover; /* Ridimensiona l'immagine per coprire tutto lo schermo */
+            background-position: center; /* Centra l'immagine */
+            background-repeat: no-repeat; /* Evita la ripetizione */
+            background-attachment: fixed; /* Mantiene l'immagine fissa */
+            width: 100vw; /* Occupa tutta la larghezza della viewport */
+            height: 100vh; /* Occupa tutta l'altezza della viewport */
         }
+
+        /* Aggiungi un overlay scuro per migliorare la leggibilità del contenuto */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Colore nero con trasparenza */
+            z-index: -1; /* Posiziona sotto il contenuto */
+        }
+
 	</style>
 	</head>
 	<body>
@@ -34,19 +55,63 @@
 	<script src="Figure js/Slide.js"></script>
 	
     <script>
-        
-		const para = new Parallelepiped({
-			width: 20,   // 20% della viewport
-			height: 30,  // 30% della viewport
-			depth: 10,   // 10% della viewport
-			color: 'rgba(52, 152, 219, 0.8)',
-			customFace: {
-				face: 'front',
-				html: '<h2 style="color:black">Contenuto</h2><p style="color:black">Testo personalizzato</p>'
-			},
-		});
 
-		document.body.appendChild(para.element);
+    let currentContentIndex = 0;
+
+    const para = new Parallelepiped({
+        width: 100,
+        height: 100,
+        depth: 1,
+        color: 'rgba(52, 152, 219, 0.2)',
+        customFace: {
+            face: 'front',
+            html: contents[currentContentIndex]
+        },
+    });
+
+    document.body.appendChild(para.element);
+
+    // Gestione dello scroll
+    let lastScroll = window.pageYOffset;
+    let isScrolling = false;
+
+    window.addEventListener('wheel', (e) => {
+        if (!isScrolling) {
+            isScrolling = true;
+            
+            const delta = e.deltaY > 0 ? 1 : -1;
+            currentContentIndex = (currentContentIndex + delta + contents.length) % contents.length;
+            
+            // Aggiorna il contenuto
+            para.customFace.html = contents[currentContentIndex];
+            document.querySelector('.custom-face').innerHTML = para.customFace.html;
+            
+            // Animazione transizione
+            document.querySelector('.custom-face').style.opacity = 0;
+            setTimeout(() => {
+                document.querySelector('.custom-face').style.opacity = 1;
+            }, 300);
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, 500);
+        }
+    });
+
+    // Stile per la transizione
+    const style = document.createElement('style');
+    style.textContent = `
+        .custom-face {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .content {
+            padding: 20px;
+            font-size: 2em;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+    `;
+    document.head.appendChild(style);
 
         // Inizializzazione cubi
         const cubeContainer = document.getElementById('cubeContainer');
