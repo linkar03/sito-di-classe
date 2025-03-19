@@ -141,8 +141,8 @@
                     rotateX(${this.rotationX}deg)
                     rotateY(${this.rotationY}deg)`;
 
-                this.rotationX += 0.5;
-                this.rotationY += 0.5;
+                this.rotationX += this.rotationSpeedX;
+                this.rotationY += this.rotationSpeedY;
             }
         }
 
@@ -156,8 +156,10 @@
             size: config[4],
             speedX: config[5],
             speedY: config[6],
-            rotationX: Math.random() * 360,
-            rotationY: Math.random() * 360
+			rotationSpeedX: config[7],
+            rotationSpeedY: config[8],
+            rotationX: 360,
+            rotationY: 360
         }));
 
         cubes.forEach(cube => cubeContainer.appendChild(cube.element));
