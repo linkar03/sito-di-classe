@@ -19,6 +19,8 @@ class Parallelepiped {
 				this.y = Math.random() * (window.innerHeight - this.realHeight);
 
 				this.init();
+				
+				this.element.querySelector('.face').setAttribute('data-face', this.customFace.face);
 			}
 
 			calcDimensions() {
@@ -26,7 +28,12 @@ class Parallelepiped {
 				this.realHeight = (window.innerHeight * this.height) / 100;
 				this.realDepth = (Math.min(window.innerWidth, window.innerHeight) * this.depth) / 100;
 			}
-
+			
+			updateContent(newHtml) {
+				this.customFace.html = newHtml;
+				this.element.querySelector(`[data-face="${this.customFace.face}"]`).innerHTML = newHtml;
+			}
+			
 			init() {
 				// Crea le 6 facce
 				const faces = [

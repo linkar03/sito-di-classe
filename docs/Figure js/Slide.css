@@ -10,6 +10,7 @@
     transform-style: preserve-3d;
     opacity: 1; /* Rendila semi-trasparente */
     z-index: 1; /* Mettila dietro ai cubi */
+	transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .parallelepiped .face {
@@ -26,4 +27,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+	transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+
+.content {
+    transform-origin: center center;
+    animation: contentEnter 0.2s ease-out;
+}
+
+@keyframes contentEnter {
+    0% {
+        transform: rotateX(90deg) translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0) translateY(0);
+        opacity: 1;
+    }
 }
