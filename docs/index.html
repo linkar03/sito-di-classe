@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
 	<link rel="icon" type="logo" href="Risorse/logo.png">
-    <link rel="apple-touch-icon" href="Risorse/logo.png"> <!-- Per dispositivi Apple -->
-	
+    <link rel="apple-touch-icon" href="Risorse/logo.png"> 
+	<!-- Per dispositivi Apple -->
     <title>Sito di classe</title>
     <style>
         :root {
             --cube-font: Arial, sans-serif;
             --cube-text-color: #ffffff;
         }
-
+		
         body {
             margin: 0;
             overflow: hidden;
             user-select: none;
         }
-
+		
         #cubeContainer {
             position: fixed;
             width: 100vw;
@@ -67,66 +66,66 @@
         .top { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
         .bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
     </style>
-</head>
-<body>
+	</head>
+	<body>
     <div id="cubeContainer"></div>
-    <script src="elenco.js"></script>
+    <script src="script.js"></script>
     <script>
         class Cube {
-            constructor(config) {
-			this.element = document.createElement('div');
-			this.element.className = 'cube';
-			Object.assign(this, config);
-			
-			this.size = config.size || 100;
-			this.element.style.setProperty('--size', `${this.size}px`);
-			this.element.style.width = `${this.size}px`;
-			this.element.style.height = `${this.size}px`;
+			constructor(config) {
+				this.element = document.createElement('div');
+				this.element.className = 'cube';
+				Object.assign(this, config);
+				
+				this.size = config.size || 100;
+				this.element.style.setProperty('--size', `${this.size}px`);
+				this.element.style.width = `${this.size}px`;
+				this.element.style.height = `${this.size}px`;
 
-			this.x = Math.random() * (window.innerWidth - this.size);
-			this.y = Math.random() * (window.innerHeight - this.size);
-			this.init();
+				this.x = Math.random() * (window.innerWidth - this.size);
+				this.y = Math.random() * (window.innerHeight - this.size);
+				this.init();
 
-			// RIMUOVI QUESTO EVENT LISTENER DUPLICATO
-			// this.element.addEventListener('click', (e) => {
-			//    e.preventDefault();
-			//    window.location.href = pages[1][1];
-			// });
-		}
+				// RIMUOVI QUESTO EVENT LISTENER DUPLICATO
+				// this.element.addEventListener('click', (e) => {
+				//    e.preventDefault();
+				//    window.location.href = pages[1][1];
+				// });
+			}
 
-            init() {
-			const faces = [
-				{ class: 'front', type: 'image' },
-				{ class: 'back', type: 'image' },
-				{ class: 'right', type: 'text' },
-				{ class: 'left', type: 'text' },
-				{ class: 'top', type: 'text' },
-				{ class: 'bottom', type: 'text' }
-			];
+			init() {
+				const faces = [
+					{ class: 'front', type: 'image' },
+					{ class: 'back', type: 'image' },
+					{ class: 'right', type: 'text' },
+					{ class: 'left', type: 'text' },
+					{ class: 'top', type: 'text' },
+					{ class: 'bottom', type: 'text' }
+				];
 
-			faces.forEach(({ class: faceClass, type }) => {
-				const face = document.createElement('div');
-				face.className = `face ${faceClass}`;
+				faces.forEach(({ class: faceClass, type }) => {
+					const face = document.createElement('div');
+					face.className = `face ${faceClass}`;
 
-				if(type === 'image' && this.image) {
-					face.classList.add('face-image');
-					face.style.backgroundImage = `url('${this.image}')`;} else {
-					face.style.backgroundColor = this.color;
-					
-					if(type === 'text') {
-						const textDiv = document.createElement('div');
-						textDiv.className = 'face-text';
-						textDiv.innerHTML = this.name;
-						face.appendChild(textDiv);
+					if(type === 'image' && this.image) {
+						face.classList.add('face-image');
+						face.style.backgroundImage = `url('${this.image}')`;} else {
+						face.style.backgroundColor = this.color;
+						
+						if(type === 'text') {
+							const textDiv = document.createElement('div');
+							textDiv.className = 'face-text';
+							textDiv.innerHTML = this.name;
+							face.appendChild(textDiv);
+						}
 					}
-				}
 
-				this.element.appendChild(face);
-			});
+					this.element.appendChild(face);
+				});
 
-                this.element.addEventListener('click', (e) => {
-					e.preventDefault();
-					window.location.href = this.link;
+				this.element.addEventListener('click', (e) => {
+						e.preventDefault();
+						window.location.href = this.link;
 				});
             }
 
@@ -140,8 +139,7 @@
                 this.element.style.transform = `
                     translate(${this.x}px, ${this.y}px)
                     rotateX(${this.rotationX}deg)
-                    rotateY(${this.rotationY}deg)
-                `;
+                    rotateY(${this.rotationY}deg)`;
 
                 this.rotationX += 0.5;
                 this.rotationY += 0.5;
