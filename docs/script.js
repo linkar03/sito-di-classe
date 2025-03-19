@@ -79,7 +79,7 @@ const pages = [
         "Alessio", 
         dr_pagine + "Alessio/Alessio.html",
         dr_risorse + "immagine_profilo_alessio.jpg",
-        getRandomBlueTone(),
+        getRandomGreenTone(),
         getRandomFloat(dimensione_min,dimensione_max), 
         getRandomFloat(velocita_min_x,velocita_max_x), 
         getRandomFloat(velocita_min_x,velocita_max_y),
