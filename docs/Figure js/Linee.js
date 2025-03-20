@@ -12,7 +12,7 @@ class TrackerMouse {
 			document.addEventListener('mousemove', (event) => {
 				this.x = event.clientX; // Coordinata X rispetto alla finestra
 				this.y = event.clientY; // Coordinata Y rispetto alla finestra
-				console.log(`X: ${this.x}, Y: ${this.y}`); // Stampa le coordinate in console
+				//console.log(`X: ${this.x}, Y: ${this.y}`); // Stampa le coordinate in console
 			});
 		}
 
@@ -73,3 +73,48 @@ class LineaPersonalizzata {
 			this.elemento.setAttribute('stroke', colore);
 		}
 	}
+	
+	
+class LineaCurva {
+    constructor(punti, color = '#ff00ff', spessore = 1) {
+        this.element = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        this.element.setAttribute('stroke', color);
+        this.element.setAttribute('fill', 'none');
+        this.element.setAttribute('stroke-width', spessore);
+        this.update(punti);
+    }
+
+    update(punti) {
+        const path = punti.map((p, i) => 
+            `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`
+        ).join(' ') + ' Z';
+        this.element.setAttribute('d', path);
+    }
+
+    aggiungiA(parent) {
+        if (!this.element.parentElement) {
+            parent.appendChild(this.element);
+        }
+        return this;
+    }
+}
+
+
+
+
+const tracker = new TrackerMouse();
+
+// Anima una linea
+const x_linea_crescente = new LineaPersonalizzata(100, 100, 100, 100, 3, '#ffffff').aggiungiA();
+const x_linea_decrescente = new LineaPersonalizzata(100, 100, 100, 100, 3, '#ffffff').aggiungiA();
+
+function anima_linee() {
+
+	const coordinate = tracker.ottieniCoordinate();
+
+	x_linea_crescente.aggiornaPosizione(coordinate.x-10, coordinate.y-10, coordinate.x + 10 ,coordinate.y+10);
+	
+	x_linea_decrescente.aggiornaPosizione(coordinate.x-10, coordinate.y+10, coordinate.x + 10 ,coordinate.y-10);
+	
+	requestAnimationFrame(anima_linee);
+}
