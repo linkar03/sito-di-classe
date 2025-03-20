@@ -10,6 +10,7 @@
 	
 	<link rel="stylesheet" href="Figure js/Cubo.css">
 	<link rel="stylesheet" href="Figure js/Slide.css">
+	<link rel="stylesheet" href="Figure js/Linee.css">
 	
     <style>
         :root {
@@ -21,16 +22,11 @@
             margin: 0;
             overflow: hidden;
             user-select: none;
-
             position: relative;
             z-index: 0;
-            background-image: url('Risorse/giphy2.gif');
-            background-size: cover; /* Ridimensiona l'immagine per coprire tutto lo schermo */
-            background-position: center; /* Centra l'immagine */
-            background-repeat: no-repeat; /* Evita la ripetizione */
-            background-attachment: fixed; /* Mantiene l'immagine fissa */
-
+            background-color: #000000;
         }
+
 
 
 	</style>
@@ -41,8 +37,27 @@
     <script src="script.js"></script>
 	<script src="Figure js/Cubo.js"></script>
 	<script src="Figure js/Slide.js"></script>
+	<script src="Figure js/Linee.js"></script>
 	
     <script>
+
+	const tracker = new TrackerMouse();
+
+	// Anima una linea
+	const x_linea_crescente = new LineaPersonalizzata(100, 100, 100, 100, 3, '#ffffff').aggiungiA();
+	const x_linea_decrescente = new LineaPersonalizzata(100, 100, 100, 100, 3, '#ffffff').aggiungiA();
+
+	function anima_linee() {
+	
+		const coordinate = tracker.ottieniCoordinate();
+
+		x_linea_crescente.aggiornaPosizione(coordinate.x-50, coordinate.y-50, coordinate.x + 50 ,coordinate.y+50);
+		
+		x_linea_decrescente.aggiornaPosizione(coordinate.x-50, coordinate.y+50, coordinate.x + 50 ,coordinate.y-50);
+		
+		requestAnimationFrame(anima);
+	}
+	
 
     let currentContentIndex = 0;
 
@@ -123,8 +138,11 @@
         function animate() {
             cubes.forEach(cube => cube.update());
             requestAnimationFrame(animate);
+			anima_linee();
         }
+		
         animate();
+		
     </script>
 </body>
 </html>
