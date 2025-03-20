@@ -27,6 +27,8 @@
             background-color: #000000;
 			
         }
+	
+
 
 	</style>
 	</head>
@@ -67,11 +69,15 @@
 			if( stato_gioco != Stato.PAUSA )
 				{
 				cubes.forEach(cube => cube.update());
+				if( stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO)
+				{
+					globalAnimation();
+				}
 				}
 				
 			anima_linee();
 			
-			if( circlesDB.length <= 1 && (stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO))
+			while( circlesDB.length <= 10 && (stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO))
 				initRandomCircles();
 			
 		 requestAnimationFrame(animate);
