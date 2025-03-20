@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="logo" href="Risorse/logo.png">
+    <link rel="apple-touch-icon" href="Risorse/logo.png"> 
+	<!-- Per dispositivi Apple -->
+    <title>Sito di classe</title>
+	
+	<link rel="stylesheet" href="Figure js/Cubo.css">
+	<link rel="stylesheet" href="Figure js/Slide.css">
+	<link rel="stylesheet" href="Figure js/Linee.css">
+	
+    <style>
+        :root {
+            --cube-font: Arial, sans-serif;
+            --cube-text-color: #ffffff;
+        }
+		
+        body {
+            margin: 0;
+            overflow: hidden;
+            user-select: none;
+            position: relative;
+            z-index: 0;
+            background-color: #000000;
+			
+        }
+	
+
+
+	</style>
+	</head>
+	<body>
+
+    <div id="cubeContainer"></div>
+    <script src="script.js"></script>
+	<script src="Figure js/Cubo.js"></script>
+	<script src="Figure js/Slide.js"></script>
+	<script src="Figure js/Linee.js"></script>
+	<script src="Figure js/Math.js"></script>
+	<script src="Figure js/Gioco.js"></script>
+	<script src="Figure js/Scritte.js"></script>
+	
+    <script>
+		
+        // Inizializzazione cubi
+        const cubeContainer = document.getElementById('cubeContainer');
+        const cubes = pages.map(config => new Cube({
+            name: config[0],
+            link: config[1],
+            image: config[2],
+            color: config[3],
+            size: config[4],
+            speedX: config[5],
+            speedY: config[6],
+			rotationSpeedX: config[7],
+            rotationSpeedY: config[8],
+            rotationX: 360,
+            rotationY: 360
+        }));
+
+        cubes.forEach(cube => cubeContainer.appendChild(cube.element));
+	
+        // Animazione
+        function animate() {
+		
+			if( stato_gioco != Stato.PAUSA )
+				{
+				cubes.forEach(cube => cube.update());
+				if( stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO)
+				{
+					globalAnimation();
+				}
+				}
+				
+			anima_linee();
+			
+			while( circlesDB.length <= 5 && (stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO))
+				initRandomCircles();
+			
+		 requestAnimationFrame(animate);
+        }
+		
+        animate();
+		
+    </script>
+</body>
+</html>

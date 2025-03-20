@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alessandro Romano - Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .hero {
+      background-color: #0d6efd;
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      padding: 60px 0;
+    }
+
+    footer {
+      background-color: #0d6efd;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .btn-custom {
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 25px;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #084298;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <img src="../../Risorse/immagine_profilo_ale.jpg" alt="Foto Alessandro" class="profile-pic">
+      <h1>Ciao, sono Alessandro Romano</h1>
+      <p id="greeting" class="lead"></p>
+      <a href="#about" class="btn btn-custom mt-3">Scopri di più</a>
+    </div>
+  </section>
+
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">Chi sono</h2>
+      <p class="text-center">Sono Alessandro, cineasta appassionato di tecnologia e tramutato programmatore</p>
+      <p class="text-center">Attualmente sto approfondendo in particolare l'intelligenza artificiale e lo sviluppo di software. Mi
+        piace anche condividere le mie conoscenze collaborando con altre persone.</p>
+    </div>
+  </section>
+
+  
+  <section id="interests" class="section bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Cosa mi piace fare</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+          <i class="bi bi-code-slash" style="font-size: 3rem;"></i>
+          <h4 class="mt-3">Programmare</h4>
+          <p>Amo creare applicazioni semplici e funzionali, con una passione particolare per l'intelligenza
+            artificiale e la sua potenziale intersezione con l'automazione</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="bi bi-controller" style="font-size: 3rem;"></i>
+          <h4 class="mt-3">Videogiochi</h4>
+          <p>I videogiochi sono la mia passione fin da piccolo. Mi piace giocarci, studiarli e analizzarne le
+            meccaniche, magari un giorno ne svilupperò qualcuno</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Alessandro Romano</p>
+  </footer>
+
+  <!-- Bootstrap JS + Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Custom JS -->
+  <script>
+    // Saluto dinamico in base all'ora
+    const greetingElement = document.getElementById('greeting');
+    const now = new Date();
+    const hour = now.getHours();
+
+    let greetingText;
+    if (hour < 12) {
+      greetingText = "Buongiorno!";
+    } else if (hour < 18) {
+      greetingText = "Buon pomeriggio!";
+    } else {
+      greetingText = "Buona serata!";
+    }
+
+    greetingElement.textContent = greetingText;
+  </script>
+
+</body>
+
+</html>
+

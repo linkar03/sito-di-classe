@@ -1,0 +1,55 @@
+/* eslint-disable no-unused-vars */
+
+.parallelepiped {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Permette di cliccare attraverso la slide */
+    transform-style: preserve-3d;
+    opacity: 1; /* Rendila semi-trasparente */
+    z-index: 1; /* Mettila dietro ai cubi */
+	transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.parallelepiped .face {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid rgba(255,255,255,0.1);
+	z-index: 1000;
+	pointer-events: none;
+}
+
+.parallelepiped .face {
+	pointer-events: auto;
+	}
+
+.custom-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+
+.content {
+    transform-origin: center center;
+    animation: contentEnter 0.2s ease-out;
+}
+
+@keyframes contentEnter {
+    0% {
+        transform: rotateX(90deg) translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0) translateY(0);
+        opacity: 1;
+    }
+}

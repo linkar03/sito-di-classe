@@ -1,0 +1,50 @@
+/* eslint-disable no-unused-vars */
+	#cubeContainer {
+		position: relative;
+		z-index: 2; /* Porta i cubi in primo piano */
+	}
+	
+	.cube {
+		pointer-events: auto;
+		position: absolute;
+		cursor: pointer;
+		transition: transform 0.2s;
+		transform-style: preserve-3d;
+		z-index: 500;
+	}
+	
+	.face {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.face-image {
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.face-text {
+		font-family: var(--cube-font);
+		color: var(--cube-text-color);
+		text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+		text-align: center;
+		font-size: 1.2em;
+	}
+
+	/* Posizionamento facce */
+	.front { transform: translateZ(calc(var(--size) / 2)); }
+	.back { transform: translateZ(calc(var(--size) / -2)) rotateX(180deg); }
+	.right { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+	.left { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
+	.top { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+	.bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
+	
+	
+	
+	

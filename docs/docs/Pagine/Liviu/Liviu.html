@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liviu Istoc - Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .profile-card {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #e4e6eb;
+            position: relative;
+            top: -20px;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .name {
+            color: #1d1f23;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        .surname {
+            color: #606770;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .age {
+            color: #606770;
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+
+        .description {
+            color: #1d1f23;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .skills {
+            background-color: #f0f2f5;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .skills h3 {
+            margin-bottom: 15px;
+            color: #1d1f23;
+        }
+
+        .skills ul {
+            list-style-type: none;
+            columns: 2;
+        }
+
+        .skills li {
+            margin-bottom: 8px;
+            color: #606770;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 30px;
+            }
+            
+            .profile-image {
+                top: 0;
+                width: 200px;
+                height: 200px;
+            }
+            
+            .skills ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <img src="../../Risorse/immagine_profilo_liviu.png" alt="Liviu Istoc" class="profile-image">
+            <div class="profile-info">
+                <h1 class="name">Liviu</h1>
+                <h2 class="surname">Istoc</h2>
+                <p class="age">20 anni</p>
+                
+                <p class="description">
+                    Sono uno script programmer.<br>
+                </p>
+
+                <div class="skills">
+                    <h3>Competenze Tecniche</h3>
+                    <ul>
+                        <li>C++</li>
+                        <li>C#</li>
+                        <li>Python</li>
+                        <li>HTML/CSS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
