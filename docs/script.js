@@ -136,6 +136,19 @@ const pages = [
 		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
     
     ],
+
+    [
+        "Linuo", 
+        dr_pagine + "Linuo/BioLino.html",
+        dr_risorse + "pfp.jpg",
+        getRandomBlueTone(),
+        0, 
+        getRandomFloat(velocita_min_x,velocita_max_x), 
+        getRandomFloat(velocita_min_x,velocita_max_y),
+		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
+		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
+    
+    ],
 ];
 
 const numero_cubi = pages.length;
