@@ -45,6 +45,3 @@
 	.top { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
 	.bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
 	
-	
-	
-	
