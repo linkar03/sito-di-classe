@@ -87,5 +87,17 @@ const pages = [
 		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
     
     ],
+    [
+        "Giada", 
+        dr_pagine + "Giada/Giada.html",
+        dr_risorse + "immagine_profilo_giada.jpg",
+        getRandomBlueTone(),
+        getRandomFloat(dimensione_min,dimensione_max), 
+        getRandomFloat(velocita_min_x,velocita_max_x), 
+        getRandomFloat(velocita_min_x,velocita_max_y),
+		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
+		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
+    
+    ],
 	
 ];
