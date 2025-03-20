@@ -67,8 +67,8 @@ var velocita_rotazione_max_x = 3;
 var velocita_rotazione_min_y = -1;
 var velocita_rotazione_max_y = 1;
 
-var dr_pagine = "Pagine/"
-var dr_risorse = "Risorse/"
+var dr_pagine = "Pagine/";
+var dr_risorse = "Risorse/";
 
 //----------------------------------------
 

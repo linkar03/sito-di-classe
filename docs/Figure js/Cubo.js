@@ -64,8 +64,8 @@ class Cube {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                if(this.x <= 0 || this.x >= window.innerWidth - this.size) this.speedX *= -1;
-                if(this.y <= 0 || this.y >= window.innerHeight - this.size) this.speedY *= -1;
+                if(this.x <= 0 || this.x >= window.innerWidth - this.size) {this.speedX *= -1};
+                if(this.y <= 0 || this.y >= window.innerHeight - this.size) {this.speedY *= -1};
 
                 this.element.style.transform = `
                     translate(${this.x}px, ${this.y}px)
