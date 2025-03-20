@@ -51,14 +51,14 @@ function getRandomPurpleTone() {
 //------ VARIABILI GLOBALI ---------------
 //----------------------------------------
 
-var dimensione_min = 120;
-var dimensione_max = 200;
+var dimensione_min = 80;
+var dimensione_max = 150;
 
-var velocita_min_x = -5;
-var velocita_max_x = 5;
+var velocita_min_x = -15;
+var velocita_max_x = 15;
 
-var velocita_min_y = -5;
-var velocita_max_y = 5;
+var velocita_min_y = -15;
+var velocita_max_y = 15;
 
 
 var velocita_rotazione_min_x = -3;
@@ -145,9 +145,4 @@ pages.forEach((page, index) => {
     page[4] = dimensione_min + step_dimensione * index;
 });
 
-
-const contents = [
-        '<div class="content"><h1>Benvenuto nel sito</h1></div>',
-        '<div class="content"><h2>Clicca i cubi per maggiori informazioni</h2></div>',
-    ];
 

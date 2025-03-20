@@ -10,6 +10,7 @@
 		cursor: pointer;
 		transition: transform 0.2s;
 		transform-style: preserve-3d;
+		z-index: 500;
 	}
 	
 	.face {
