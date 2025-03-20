@@ -118,3 +118,66 @@ function anima_linee() {
 	
 	requestAnimationFrame(anima_linee);
 }
+
+function generaPuntiLatiDiversi() {
+        const lati = ['top', 'bottom', 'left', 'right'];
+        const latoStart = lati[Math.floor(Math.random() * 4)];
+        let latoEnd = lati[Math.floor(Math.random() * 4)];
+        
+        // Assicura che i lati siano diversi
+        while(latoEnd === latoStart) {
+            latoEnd = lati[Math.floor(Math.random() * 4)];
+        }
+
+        const getCoords = (lato) => {
+            switch(lato) {
+                case 'top': return {x: Math.random() * window.innerWidth/10 + window.innerWidth*8/10, y: 0};
+                case 'bottom': return {x: window.innerWidth/10 + Math.random() * window.innerWidth*8/10, y: window.innerHeight};
+                case 'left': return {x: 0, y: window.innerHeight/10 + Math.random() * window.innerHeight*8/10};
+                case 'right': return {x: window.innerWidth, y: window.innerHeight/10 + Math.random() * window.innerHeight*8/10};
+            }
+        };
+
+        return [getCoords(latoStart), getCoords(latoEnd)];
+    }
+	
+class LineaPericolosa extends LineaPersonalizzata {
+    
+	constructor() {
+        // Genera punti casuali su lati diversi
+        const [start, end] = generaPuntiLatiDiversi();
+        super(start.x, start.y, end.x, end.y);
+        
+        this.fase = 0;
+        this.attiva = false;
+        this.aggiungiA();
+        this.avviaTransizioni();
+    }
+	
+    avviaTransizioni() {
+        // Fase 1: Spessore 2, giallo (1 secondo)
+        this.aggiornaLarghezza(2);
+        this.aggiornaColore('#ffff00');
+        
+        // Fase 2: Spessore 5, arancione (1 secondo)
+        setTimeout(() => {
+            this.fase = 1;
+            this.aggiornaLarghezza(5);
+            this.aggiornaColore('#ffa500');
+        }, 500);
+
+        // Fase 3: Spessore 100, rosso (3 secondi)
+        setTimeout(() => {
+            this.fase = 2;
+			this.attiva = true;
+            this.aggiornaLarghezza(30);
+            this.aggiornaColore('#ff0000');
+        }, 500);
+
+        // Rimozione dopo 5 secondi totali
+        setTimeout(() => {
+            this.elemento.remove();
+			this.attiva = false;
+        }, 1000);
+    }
+}

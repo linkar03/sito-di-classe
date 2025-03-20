@@ -55,8 +55,20 @@ class Cube {
 				});
 
 				this.element.addEventListener('click', (e) => {
-						e.preventDefault();
+					
+					e.preventDefault();
+					
+					if(stato_gioco != Stato.AVVIATO)
+					{
+						
 						window.location.href = this.link;
+					}
+					else
+					{
+					 console.log("Cubo toccato!");	
+					 perso();
+					}
+					
 				});
             }
 

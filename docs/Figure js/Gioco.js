@@ -99,7 +99,7 @@ const eventiPersonalizzati = {
         punteggio -= circle.points * 2;
         document.getElementById("punteggio").textContent = punteggio;
         circle.element.style.transform = 'scale(1.5)';
-        circle.element.style.backgroundColor = '#ff000055';
+		circle.element.style.opacity = '0.5';
         setTimeout(() => circle.element.remove(), 300);
     },
     
@@ -208,7 +208,7 @@ function deleteCircle(id, evento) {
 	
 	if(evento == " ")
 	{
-		circle.element.remove();
+		circlesDB[index].element.remove();
 		return;
 	}
 	
@@ -270,68 +270,7 @@ function initRandomCircles() {
     }
 }
 
-function generaPuntiLatiDiversi() {
-        const lati = ['top', 'bottom', 'left', 'right'];
-        const latoStart = lati[Math.floor(Math.random() * 4)];
-        let latoEnd = lati[Math.floor(Math.random() * 4)];
-        
-        // Assicura che i lati siano diversi
-        while(latoEnd === latoStart) {
-            latoEnd = lati[Math.floor(Math.random() * 4)];
-        }
 
-        const getCoords = (lato) => {
-            switch(lato) {
-                case 'top': return {x: Math.random() * window.innerWidth, y: 0};
-                case 'bottom': return {x: Math.random() * window.innerWidth, y: window.innerHeight};
-                case 'left': return {x: 0, y: Math.random() * window.innerHeight};
-                case 'right': return {x: window.innerWidth, y: Math.random() * window.innerHeight};
-            }
-        };
-
-        return [getCoords(latoStart), getCoords(latoEnd)];
-    }
-	
-class LineaPericolosa extends LineaPersonalizzata {
-    
-	constructor() {
-        // Genera punti casuali su lati diversi
-        const [start, end] = generaPuntiLatiDiversi();
-        super(start.x, start.y, end.x, end.y);
-        
-        this.fase = 0;
-        this.attiva = false;
-        this.aggiungiA();
-        this.avviaTransizioni();
-    }
-	
-    avviaTransizioni() {
-        // Fase 1: Spessore 2, giallo (1 secondo)
-        this.aggiornaLarghezza(2);
-        this.aggiornaColore('#ffff00');
-        
-        // Fase 2: Spessore 5, arancione (1 secondo)
-        setTimeout(() => {
-            this.fase = 1;
-            this.aggiornaLarghezza(5);
-            this.aggiornaColore('#ffa500');
-        }, 1000);
-
-        // Fase 3: Spessore 100, rosso (3 secondi)
-        setTimeout(() => {
-            this.fase = 2;
-			this.attiva = true;
-            this.aggiornaLarghezza(30);
-            this.aggiornaColore('#ff0000');
-        }, 1000);
-
-        // Rimozione dopo 5 secondi totali
-        setTimeout(() => {
-            this.elemento.remove();
-			this.attiva = false;
-        }, 2000);
-    }
-}
 
 // Gestione delle linee pericolose
 let lineeAttive = [];
@@ -339,7 +278,7 @@ let mousePos = {x: 0, y: 0};
 
 function generaLineePericolose() {
 	
-    const numLinee = Math.floor(Math.random() * 50 ) + 1; // 1-5 linee
+    const numLinee = Math.floor(Math.random() * 10 ) + 1; // 1-5 linee
 	if( stato_gioco != Stato.PAUSA && stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO )
     for(let i = 0; i < numLinee; i++) {
         setTimeout(() => {

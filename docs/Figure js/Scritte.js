@@ -23,6 +23,7 @@ function perso() {
         stato_gioco = Stato.PERSO;
     }
 	
+	document.body.style.backgroundColor = "red";
 	console.log("Game Ended");
 	para.updateContent(contents_perso[0]);
 	document.getElementById("punteggio").textContent = punteggio;
