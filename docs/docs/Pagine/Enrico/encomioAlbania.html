@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Attestato al Valore - Liberazione dell'Albania</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #faf8f0;
+            margin: 0;
+            padding: 50px;
+            min-height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        }
+
+        .attestato-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 15px double #8b4513;
+            padding: 50px 70px;
+            position: relative;
+            background: #fffef7;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #c0a672;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #2d2d2d;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 20px 0;
+        }
+
+        .decorative-border {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            top: 5%;
+            left: 5%;
+            border: 2px solid #c0a672;
+            pointer-events: none;
+        }
+
+        .testo-ufficiale {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: justify;
+            margin: 30px 0;
+            color: #454545;
+        }
+
+        .sigillo {
+            width: 150px;
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            opacity: 0.9;
+        }
+
+        .firma {
+            margin-top: 50px;
+            border-top: 2px solid #000;
+            width: 300px;
+            padding-top: 15px;
+        }
+
+        .numero-protocollo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .ministero-text {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2em;
+            color: #8b0000;
+            margin: 20px 0;
+        }
+
+        .watermark {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 200px;
+            transform: rotate(-45deg);
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="attestato-container">
+        <div class="watermark">VALORE</div>
+        <div class="numero-protocollo">Prot. N° 1945/1991-DEF</div>
+        
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Emblem_of_Albania.svg" width="80" alt="Stemma Albanese">
+            <div class="ministero-text">Repubblica d'Albania<br>Ministero della Difesa</div>
+            <div class="title">Attestato al Valore Militare</div>
+        </div>
+
+        <div class="testo-ufficiale">
+            <p>Il Presidente della Repubblica d'Albania</p>
+            
+            <p style="text-indent: 50px;">
+                <strong>Conferito a</strong><br>
+                <span style="font-size: 1.3em; font-weight: bold;">ENRICO DEL PIEDE</span><br>
+                Codice Identificativo: ED-1991-ALB-01
+            </p>
+
+            <p style="text-indent: 50px;">
+                <em>Per atto di straordinario eroismo compiuto in data 12 Luglio 1991<br>
+                nella regione di Valona, Repubblica Socialista d'Albania</em>
+            </p>
+
+            <p>Con singolare coraggio e sprezzo del pericolo, in condizioni climatiche avverse e sotto fuoco nemico, 
+               ha condotto un'azione militare risolutiva utilizzando unico colpo di cannone termoidraulico modificato, 
+               determinando la liberazione immediata del territorio nazionale dal regime oppressivo.</p>
+
+            <p>L'operazione "Termosifone Liberatore" ha portato alla smobilitazione di 15 divisioni nemiche 
+               e al recupero di 45 impianti di riscaldamento centralizzato.</p>
+
+            <p>L'atto è stato riconosciuto valido e confermato dal Parlamento Albanese con delibera n. 881/1991.</p>
+        </div>
+
+        <div class="firma">
+            <p>Il Ministro della Difesa<br>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Autograf_Heinrich_Himmler.svg/800px-Autograf_Heinrich_Himmler.svg.png" width="150" style="opacity: 0.8;"><br>
+            <strong>Prof. Dr. Aleksander Meksi</strong></p>
+        </div>
+
+        <img src="../../Risorse/albania.png" class="sigillo" alt="Sigillo Ufficiale">
+
+        <div class="decorative-border"></div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; font-size: 0.8em; color: #666;">
+        Documento ufficiale - Riproduzione vietata ai sensi dell'art. 15 Legge 1456/1991<br>
+        Validazione internazionale: NATO 1991-ALB-04512 | ONU PEACEKEEPING 8812
+    </div>
+</body>
+</html>
