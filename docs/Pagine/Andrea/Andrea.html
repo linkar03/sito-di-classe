@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Avventure di Andrea, l'Uomo Pesce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            color: #004d40;
+            line-height: 1.6;
+        }
+        header {
+            background: url('https://example.com/header-image.jpg') no-repeat center center/cover;
+            height: 400px;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        header p {
+            font-size: 1.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .header-image {
+            width: 250px; /* Imposta la larghezza desiderata */
+            height: 250px; /* Imposta l'altezza desiderata */
+            margin: 20px auto;
+            display: block;
+            border-radius: 50%; /* Rende l'immagine rotonda */
+            object-fit: cover; /* Mantiene le proporzioni dell'immagine */
+            border: 5px solid #00796b; /* Bordo verde mare */
+            box-shadow: 0 4px 20px rgba(0, 121, 107, 0.5); /* Ombra verde mare */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transizione per l'effetto hover */
+        }
+        .header-image:hover {
+            transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+            box-shadow: 0 8px 30px rgba(0, 121, 107, 0.7); /* Ombra più intensa al passaggio del mouse */
+        }
+        nav {
+            background-color: rgba(0, 121, 107, 0.8);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffcc80;
+        }
+        section {
+            padding: 40px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: translateY(-5px);
+        }
+        h2 {
+            color: #00796b;
+            border-bottom: 2px solid #004d40;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #004d40;
+            color: white;
+        }
+        .adventure-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .adventure-list li {
+            background-color: #b2dfdb;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .adventure-list li:hover {
+            background-color: #80cbc4;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            header p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Le Avventure di Andrea, l'Uomo Pesce</h1>
+    <p>Un viaggio tra mare e leggende</p>
+    <img src="uomopesce.jpg" alt="Immagine del mare" class="header-image">
+</header>
+
+<nav>
+    <a href="#trasformazione">La Trasformazione</a>
+    <a href="#imprese">Le Grandi Imprese</a>
+    <a href="#atlantide">La Scoperta di Atlantide</a>
+    <a href="#battaglia">La Lotta contro Malakar</a>
+    <a href="#eroe">Un Eroe tra le Onde</a>
+</nav>
+
+<section id="trasformazione">
+    <h2>La Trasformazione di Andrea</h2>
+    <p>In un piccolo villaggio di pescatori chiamato Mareblu, viveva un uomo di nome Andrea, un sognatore con un amore profondo per il mare.</p>
+    <p>Ogni giorno, si avventurava in barca, esplorando le acque cristalline e sognando di scoprire le meraviglie nascoste sotto la superficie.</p>
+    <p>Un giorno, mentre navigava, una tempesta improvvisa lo colpì. Le onde si alzarono e il vento ululava, ma in mezzo al caos, Andrea vide una luce brillante emergere dalle acque. Spinto dalla curiosità, si tuffò e scoprì un antico amuleto di corallo. Non appena lo toccò, una luce abbagliante lo avvolse, trasformandolo in un uomo pesce, con squame iridescenti e una coda potente.</p>
+</section>
+
+<section id="imprese">
+    <h2>Le Grandi Imprese di Andrea</h2>
+    <p>Con i suoi nuovi poteri, Andrea iniziò a vivere avventure incredibili. Poteva comunicare con le creature marine e il mare stesso sembrava rispondere ai suoi desideri. Ecco alcune delle sue straordinarie imprese:</p>
+    <ul class="adventure-list">
+        <li>
+            <strong>Salvataggio dei Delfini:</strong> Andrea salvò un branco di delfini intrappolati in una rete di plastica, liberandoli e riportandoli in acque sicure.
+        </li>
+        <li>
+            <strong>Aiuto alla Tartaruga:</strong> Aiutò una tartaruga a trovare la sua strada verso la spiaggia per deporre le uova, proteggendola dai predatori.
+        </li>
+        <li>
+            <strong>La Battaglia con il Calamaro:</strong> Affrontò un gigantesco calamaro che minacciava la vita sottomarina, usando la sua astuzia e i suoi poteri per sconfiggerlo.
+        </li>
+    </ul>
+</section>
+
+<section id="atlantide">
+    <h2>La Scoperta di Atlantide</h2>
+    <p>Un giorno, mentre esplorava le profondità dell'oceano, Andrea scoprì un'antica città sommersa, chiamata Atlantide. Le rovine erano abitate da sirene e tritoni, che lo accolsero come un eroe. Qui, Andrea apprese che il mare era minacciato da un oscuro incantesimo lanciato da un malvagio stregone di nome Malakar, che desiderava impadronirsi delle ricchezze del mare e sottomettere tutte le creature marine.</p>
+    <p>Le sirene e i tritoni, spaventati dalla minaccia, chiesero aiuto ad Andrea. Insieme a Lyra, una sirena coraggiosa, e Thalos, un tritone astuto, decisero di unire le forze per fermare Malakar.</p>
+</section>
+
+<section id="battaglia">
+    <h2>La Lotta contro Malakar</h2>
+    <p>Andrea e i suoi amici intrapresero un viaggio epico attraverso le profondità dell'oceano, affrontando creature mitologiche, correnti pericolose e trappole magiche. Durante il loro viaggio, scoprirono che l'amuleto di corallo che Andrea aveva trovato era in realtà una chiave per accedere a un antico potere, custodito da un drago marino leggendario.</p>
+    <p>Per ottenere il potere necessario a sconfiggere Malakar, dovevano trovare il drago e convincerlo a unirsi alla loro causa. Dopo molte peripezie, finalmente trovarono il drago, un'imponente creatura di scaglie blu e oro, che inizialmente si mostrò scettico nei confronti degli umani.</p>
+    <p>Con astuzia e determinazione, Andrea riuscì a guadagnare la fiducia del drago, rivelando il suo legame con il mare e la sua volontà di proteggere le creature marine. Il drago, colpito dal coraggio di Andrea, accettò di aiutarli, donando loro un potere straordinario: la capacità di controllare le maree e le correnti.</p>
+    <p>Armati di questo nuovo potere, Andrea, Lyra, Thalos e il drago marino affrontarono Malakar in una battaglia epica che si svolse tra le onde e le tempeste. La lotta fu intensa, con incantesimi e poteri che si scontravano in un turbinio di luce e oscurità. Alla fine, grazie alla loro determinazione e al potere del drago, riuscirono a sconfiggere Malakar, liberando il mare dalla sua maledizione.</p>
+</section>
+
+<section id="eroe">
+    <h2>Un Eroe tra le Onde</h2>
+    <p>In segno di gratitudine, le sirene e i tritoni offrirono ad Andrea un dono: la possibilità di tornare umano ogni volta che lo desiderava, ma con la promessa di non dimenticare mai il suo legame con il mare. Andrea tornò al suo villaggio, ma non era più lo stesso. Ogni volta che sentiva il richiamo dell'oceano, si trasformava di nuovo in uomo pesce, pronto a vivere nuove avventure.</p>
+    <p>Con il passare del tempo, Andrea divenne una leggenda tra i pescatori di Mareblu. Le storie delle sue avventure si diffusero in tutto il villaggio e oltre, ispirando generazioni di giovani a rispettare e proteggere il mare. Ogni volta che il sole tramontava e il cielo si tingeva di arancione e blu, Andrea si recava sulla spiaggia, sentendo il richiamo dell'oceano. Con un sorriso, si tuffava nelle acque cristalline, pronto a rispondere a nuove sfide.</p>
+    <p>Un giorno, mentre nuotava tra le onde, Andrea ricevette un messaggio da Lyra e Thalos. Un nuovo pericolo minacciava il regno sottomarino: un gruppo di pirati, attratti dalle leggende di tesori sommersi, stava saccheggiando le acque e catturando creature marine per venderle al mercato nero. Andrea sapeva che doveva intervenire.</p>
+    <p>Con l'aiuto delle sirene, dei tritoni e del drago marino, Andrea organizzò una strategia per fermare i pirati. Utilizzando il potere delle maree, crearono una tempesta artificiale che colpì le navi dei pirati, facendole naufragare. Ma non si fermarono qui: Andrea e i suoi amici liberarono le creature marine catturate, restituendo loro la libertà.</p>
+    <p>La battaglia contro i pirati fu intensa, ma Andrea, con il suo coraggio e la sua determinazione, riuscì a sconfiggerli. I pirati, spaventati dalla potenza del mare e dalle creature che lo abitavano, fuggirono, promettendo di non tornare mai più.</p>
+    <p>Dopo aver riportato la pace nel regno sottomarino, Andrea tornò al villaggio, dove fu accolto come un eroe. Ma sapeva che il suo vero posto era tra le onde, dove poteva continuare a proteggere il mare e le sue meraviglie. Così, ogni volta che sentiva il richiamo dell'oceano, Andrea si trasformava di nuovo in uomo pesce, pronto a vivere nuove avventure e a combattere per la bellezza e la vita del mare.</p>
+    <p>La leggenda di Andrea, l'uomo pesce, continuò a vivere, unendo il mondo degli uomini e quello degli abissi, dimostrando che a volte, le più grandi avventure si trovano proprio sotto la superficie. Con il suo cuore colmo di amore per il mare e le sue creature, Andrea divenne un simbolo di speranza e protezione, un custode delle meraviglie sottomarine, per sempre legato all'oceano e alle sue infinite storie.</p>
+</section>
+
+<footer>
+    <p>© 2023 Le Avventure di Andrea, l'Uomo Pesce. Tutti i diritti riservati.</p>
+</footer>
+
+</body>
+</html>
