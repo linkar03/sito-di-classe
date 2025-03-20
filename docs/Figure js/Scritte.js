@@ -5,6 +5,7 @@ function startgame()
 	{ 	
 		stato_gioco = Stato.AVVIATO;
 		para.updateContent(contents_avviato[0]);
+		document.getElementById("punteggio").textContent = punteggio;
 		console.log("Game started");
 	}
 	
@@ -37,25 +38,28 @@ window.addEventListener('wheel', (e) => {
 	
 const contents_menu = [
 		
-		`<div class="content">
-        <h1 style="color:white">Punteggio Attuale</h1>
+		`<div class="content" style = "text-align: center;">
+        <h1 style="color: white; font-size: 2.5rem; text-align: center; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); margin-bottom: 20px;">
+			MiniGame ITS
+		</h1>
         <div id="contenuto_gioco">
-            <button id="start" onclick="startgame()">Avvia</button>
+            <button id="start" onclick="startgame()" style = "width: 140px;height: 60px; font-size: 18px" >Avvia Minigame</button>
         </div>
-		</div>`,
+		</div>
+		`,
 		
 		'<div class="content"><h2 style="color:white">Regole del gioco</h2><p>Clicca i cerchi, non cliccare i cubi</p></div>',
 	];
 	
 const contents_avviato = [
-		'<div class="content"><h1 style="color:white">Punteggio Attuale</h1><div id="contenuto_gioco" ><p id ="punteggio" style="color:white">0</p></div></div>',
-		'<div class="content"><h2 style="color:white">Gioco in pausa</h2></div>',
+		'<div class="content"  style = "text-align: center;"><h1 style="color:white">Punteggio Attuale</h1><div id="contenuto_gioco" ><p id ="punteggio" style="color:white">0</p></div></div>',
+		'<div class="content"  style = "text-align: center;" ><h2 style="color:white">Gioco in pausa</h2></div>',
 	];
 		
 
 const contents_perso = [
-		'<div class="content"><h1 style="color:white">Hai perso</h1><div id="contenuto_gioco" ></div></div>',
-		'<div class="content"><h2 style="color:white">Consiglio, impara a giocare</h2></div>',
+		'<div class="content"  style = "text-align: center;"><h1 style="color:white">Hai perso</h1><div id="contenuto_gioco" ></div></div>',
+		'<div class="content"  style = "text-align: center;" ><h2 style="color:white">Consiglio, impara a giocare</h2></div>',
 	];
 	
 
