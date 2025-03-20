@@ -3,6 +3,7 @@
 
 function startgame()
 	{ 	
+		generaLineePericolose();
 		stato_gioco = Stato.AVVIATO;
 		para.updateContent(contents_avviato[0]);
 		document.getElementById("punteggio").textContent = punteggio;
@@ -15,6 +16,22 @@ function pause()
 	para.updateContent(contents_avviato[1]);
 	console.log("Game Paused");
 	}
+	
+// Funzione perso
+function perso() {
+    if(stato_gioco === Stato.AVVIATO) {
+        stato_gioco = Stato.PERSO;
+    }
+	
+	console.log("Game Ended");
+	para.updateContent(contents_perso[0]);
+	document.getElementById("punteggio").textContent = punteggio;
+	
+	circlesDB.forEach(circle => {
+		deleteCircle(circle.id," ");
+	});
+}
+
 	
 function logic_scroll()
 	{
@@ -58,7 +75,7 @@ const contents_avviato = [
 		
 
 const contents_perso = [
-		'<div class="content"  style = "text-align: center;"><h1 style="color:white">Hai perso</h1><div id="contenuto_gioco" ></div></div>',
+		'<div class="content"  style = "text-align: center;"><h1 style="color:white">Hai perso</h1><div id="contenuto_gioco" ></div><p id ="punteggio" style="color:white">0</p></div>',
 		'<div class="content"  style = "text-align: center;" ><h2 style="color:white">Consiglio, impara a giocare</h2></div>',
 	];
 	
