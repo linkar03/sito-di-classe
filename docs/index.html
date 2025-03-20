@@ -65,9 +65,11 @@
 	
         // Animazione
         function animate() {
-		
+			
 			if( stato_gioco != Stato.PAUSA )
 				{
+				
+				checkCollisionWithLines();
 				cubes.forEach(cube => cube.update());
 				if( stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO)
 				{
@@ -77,7 +79,7 @@
 				
 			anima_linee();
 			
-			while( circlesDB.length <= 10 && (stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO))
+			while( circlesDB.length <= 5 && (stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO))
 				initRandomCircles();
 			
 		 requestAnimationFrame(animate);
