@@ -152,7 +152,7 @@ const pages = [
 
     [
         "Linuo", 
-        dr_pagine + "Linuo/BioLino.html",
+        dr_pagine + "Linuo/BioLino.htm",
         dr_risorse + "pfp.jpg",
         getRandomBlueTone(),
         0, 
