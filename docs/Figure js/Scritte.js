@@ -70,7 +70,11 @@ const contents_menu = [
 	];
 	
 const contents_avviato = [
-		'<div class="content"  style = "text-align: center;"><h1 style="color:white">Punteggio Attuale</h1><div id="contenuto_gioco" ><p id ="punteggio" style="color:white">0</p></div></div>',
+		`<div class="content"  style = "text-align: center;">
+		<h1 style="color:white">Punteggio Attuale</h1><div id="contenuto_gioco" ><p id ="punteggio" style="color:white">0</p></div>
+		<h1 style="color:white">Livello Attuale</h1><div id="contenuto_gioco" ><p id ="livello" style="color:white">1</p></div>
+		</div>`
+		,
 		'<div class="content"  style = "text-align: center;" ><h2 style="color:white">Gioco in pausa</h2></div>',
 	];
 		

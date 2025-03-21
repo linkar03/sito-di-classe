@@ -1,9 +1,27 @@
 let circlesDB = [];
 let nextId = 0;
 var punteggio = 0;
+var livello = 1;
+
 let cerchiTimers = new Map();
 let pausaStartTime = 0;
 let timeInPausa = 0;
+
+var livelli = 
+
+[
+ 100,200,500,1000,2000,5000,10000
+]
+
+function checklivello()
+{
+	for(var i = 0;i < livelli.length;i ++)
+		if(punteggio < livelli[i])
+		{
+			livello = i;
+			break;
+		}
+}
 
 const probabilita = [
     ["rosso", 50],
@@ -92,12 +110,16 @@ const eventiPersonalizzati = {
     aggiungi_punti: function(circle) {
         punteggio += circle.points;
         document.getElementById("punteggio").textContent = punteggio;
+		checklivello();
+		document.getElementById("livello").textContent = livello;
     },
     
     // Eventi OnDelete
     penalita: function(circle) {
         punteggio -= circle.points * 2;
         document.getElementById("punteggio").textContent = punteggio;
+		checklivello();
+		document.getElementById("livello").textContent = livello;
         circle.element.style.transform = 'scale(1.5)';
 		circle.element.style.opacity = '0.5';
         setTimeout(() => circle.element.remove(), 300);
@@ -106,6 +128,8 @@ const eventiPersonalizzati = {
     bonus: function(circle) {
         punteggio += circle.points * 1;
         document.getElementById("punteggio").textContent = punteggio;
+		checklivello();
+		document.getElementById("livello").textContent = livello;
         circle.element.style.transform = 'scale(0.5)';
         circle.element.style.opacity = '0.5';
         setTimeout(() => circle.element.remove(), 500);
@@ -248,7 +272,9 @@ document.addEventListener('click', (e) => {
         const c = circlesDB[i];
         const dx = x - c.xCenter;
         const dy = y - c.yCenter;
-        if (dx*dx + dy*dy <= c.radius*c.radius) {
+        if ( Math.abs(dx/1.25)  <= c.radius 
+		&& Math.abs(dy/1.25)  <= c.radius 
+		) {
             deleteCircle(c.id,"click");
             break;
         }
