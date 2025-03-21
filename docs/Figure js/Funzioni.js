@@ -1,5 +1,13 @@
 /* eslint-disable no-unused-vars */
 
+
+
+
+function immortale(cursole_morte_)
+{
+	cursole_morte = cursole_morte_;
+}
+
 function startgame()
 	{ 	
 		if(stato_gioco === Stato.MENU)
@@ -64,10 +72,21 @@ function logic_scroll()
 function anima_linee() {
 
 	const coordinate = tracker.ottieniCoordinate();
-
-	x_linea_crescente.aggiornaPosizione(coordinate.x-5, coordinate.y-5, coordinate.x + 5 ,coordinate.y+5);
 	
-	x_linea_decrescente.aggiornaPosizione(coordinate.x-5, coordinate.y+5, coordinate.x + 5 ,coordinate.y-5);
+	if(!cursole_morte)
+	{
+		x_linea_crescente.cambiaColoreConAnimazione('#bfbfbf', 1000);
+		x_linea_decrescente.cambiaColoreConAnimazione('#bfbfbf', 1000);
+		x_linea_crescente.aggiornaPosizione(coordinate.x-15, coordinate.y-15, coordinate.x + 15 ,coordinate.y+ 15);
+		x_linea_decrescente.aggiornaPosizione(coordinate.x-15, coordinate.y+15, coordinate.x +  15 ,coordinate.y- 15);
+	}
+	else
+	{
+		x_linea_crescente.cambiaColoreConAnimazione('#ffffff', 1000); 
+		x_linea_decrescente.cambiaColoreConAnimazione('#ffffff', 1000); 
+		x_linea_crescente.aggiornaPosizione(coordinate.x-5, coordinate.y-5, coordinate.x + 5 ,coordinate.y+5);
+		x_linea_decrescente.aggiornaPosizione(coordinate.x-5, coordinate.y+5, coordinate.x + 5 ,coordinate.y-5);
+	}
 }
 
 function generaPuntiLatiDiversi() {
@@ -93,6 +112,23 @@ function generaPuntiLatiDiversi() {
     }
 	
 
+function Configurazione_del_livello()
+{
+	var lengh_max = configurazione.length - 1;
+			
+	var conf;
+			
+	if(lengh_max >= max_level - 1)
+		conf = configurazione[max_level-1];
+	else 
+		conf = configurazione[lengh_max];
+			
+	linee_rosse = conf[0];
+	tempo_linee = conf[1];
+	probabilita = conf[2];
+			
+}
+
 function checklivello()
 {
 	for(var i = 0;i < livelli.length;i ++)
@@ -105,8 +141,9 @@ function checklivello()
 			
 			`, {duration: 2000, backgroundColor: "#9933ff"} );
 			myAlert.show();	
-
+			
 			max_level = i;
+			Configurazione_del_livello();
 			}
 			
 			livello = i;
@@ -126,8 +163,13 @@ function get_random_movement(minDx, maxDx, minDy, maxDy, minSpeed, maxSpeed) {
 function globalAnimation() {
     circlesDB.forEach(circle => {
 		
-		if(circle.config.onGoing && eventiPersonalizzati[circle.config.onGoing]) {
-            eventiPersonalizzati[circle.config.onGoing](circle);
+		if(circle.config.onGoing) {
+            const events = circle.config.onGoing.split(',').map(e => e.trim());
+            events.forEach(eventName => {
+                if(eventiPersonalizzati[eventName]) {
+                    eventiPersonalizzati[eventName](circle);
+                }
+            });
         }
 		
         if(circle.movement) {
@@ -145,7 +187,33 @@ function globalAnimation() {
         }
     });
 }
+function globalAnimation() {
+    circlesDB.forEach(circle => {
+        // Gestione eventi multipli onGoing
+        if(circle.config.onGoing) {
+            const events = circle.config.onGoing.split(',').map(e => e.trim());
+            events.forEach(eventName => {
+                if(eventiPersonalizzati[eventName]) {
+                    eventiPersonalizzati[eventName](circle);
+                }
+            });
+        }
 
+        if(circle.movement) {
+            circle.xCenter += circle.movement.dx * circle.movement.speed;
+            circle.yCenter += circle.movement.dy * circle.movement.speed;
+            
+            // Rimbalzo ai bordi
+            if(circle.xCenter < circle.radius + 5 || circle.xCenter > window.innerWidth - circle.radius - 5) 
+                circle.movement.dx *= -0.9;
+            if(circle.yCenter < circle.radius + 5 || circle.yCenter > window.innerHeight - circle.radius - 5) 
+                circle.movement.dy *= -0.9;
+            
+            circle.element.style.left = `${circle.xCenter - circle.radius}px`;
+            circle.element.style.top = `${circle.yCenter - circle.radius}px`;
+        }
+    });
+}
 
 function selectCircleType() {
     const total = probabilita.reduce((sum, [, prob]) => sum + prob, 0);
@@ -213,34 +281,51 @@ function createCircle(name, xStart, yStart, xCenter, yCenter, step) {
 // "vita" "click"
 function deleteCircle(id, evento) {
     const index = circlesDB.findIndex(c => c.id === id);
-	
-	
-	if(evento == " ")
-	{
-		circlesDB[index].element.remove();
-		return;
-	}
-	
-    if (index !== -1 && stato_gioco != Stato.PAUSA) {
-        const circle = circlesDB[index];
-        
-        // Trigger evento OnDelete
-		if(evento == "vita")
-        if(circle.config.onDie && eventiPersonalizzati[circle.config.onDie]) {
-            eventiPersonalizzati[circle.config.onDie](circle);
-        } else {
-            circle.element.remove(); // Rimozione standard se non c'è evento
+    
+    if(evento == " ") {
+        if(index !== -1) {
+            circlesDB[index].element.remove();
+            circlesDB.splice(index, 1);
         }
-        
-		if(evento == "click")
-		if(circle.config.onDelete && eventiPersonalizzati[circle.config.onDelete]) {
-            eventiPersonalizzati[circle.config.onDelete](circle);
-        } else {
-            circle.element.remove(); // Rimozione standard se non c'è evento
+        return;
+    }
+    
+    if(index !== -1 && stato_gioco != Stato.PAUSA) {
+        const circle = circlesDB[index];
+        let hasEvents = false;
+
+        // Funzione per processare multipli eventi
+        const processEvents = (eventString) => {
+            if(!eventString) return false;
+            let foundValid = false;
+            eventString.split(',').map(e => e.trim()).forEach(eventName => {
+                if(eventiPersonalizzati[eventName]) {
+                    eventiPersonalizzati[eventName](circle);
+                    foundValid = true;
+                }
+            });
+            return foundValid;
+        };
+
+        if(evento == "vita") {
+            hasEvents = processEvents(circle.config.onDie);
         }
 		
+        else if(evento == "click") {
+            hasEvents = processEvents(circle.config.onDelete);
+        }
+		
+		else if(evento == "esplosione") {
+            hasEvents = processEvents(circle.config.onExplosion);
+        }
+
+        // Rimozione solo se nessun evento è stato processato
+        //if(!hasEvents) {
+            circle.element.remove();
+        //}
+
         circlesDB.splice(index, 1);
-                
+        
         if(circlesDB.length === 0) {
             cancelAnimationFrame(animationFrameId);
             animationFrameId = null;
@@ -268,7 +353,7 @@ function initRandomCircles() {
 
 function generaLineePericolose() {
 	
-    const numLinee = Math.floor(Math.random() * 10 ) + 1; // 1-5 linee
+    const numLinee =  linee_rosse; // 1-5 linee
 	if( stato_gioco != Stato.PAUSA && stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO )
     for(let i = 0; i < numLinee; i++) {
         setTimeout(() => {
@@ -278,7 +363,7 @@ function generaLineePericolose() {
     }
     
     // Programma la prossima generazione
-	setTimeout(generaLineePericolose, Math.random() * 2000 + 2000); // 3-10 secondi
+	setTimeout(generaLineePericolose, Math.random() * tempo_linee + tempo_linee); // 3-10 secondi
 }
 
 // Funzione di collisione
@@ -297,7 +382,7 @@ function checkCollisionWithLines() {
             parseFloat(linea.elemento.getAttribute('y2'))
         );
 
-        if(d < 15) {
+        if(d < 15 && cursole_morte) {
             perso();
             return;
         }

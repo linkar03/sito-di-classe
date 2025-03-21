@@ -65,57 +65,84 @@ class TrackerMouse {
 	}
 	
 class LineaPersonalizzata {
-		constructor(x1, y1, x2, y2, width = 2, colore = '#ffffff') {
-			// Crea elemento SVG
-			this.elemento = document.createElementNS("http://www.w3.org/2000/svg", "line");
-			
-			// Imposta attributi della linea
-			this.elemento.setAttribute('x1', x1);
-			this.elemento.setAttribute('y1', y1);
-			this.elemento.setAttribute('x2', x2);
-			this.elemento.setAttribute('y2', y2);
-			this.elemento.setAttribute('stroke', colore);
-			this.elemento.setAttribute('stroke-width', width);
-			this.elemento.setAttribute('stroke-linecap', 'round'); // Estremità arrotondate
-		}
+    constructor(x1, y1, x2, y2, width = 2, colore = '#ffffff') {
+        // Crea elemento SVG
+        this.elemento = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        
+        // Imposta attributi della linea
+        this.elemento.setAttribute('x1', x1);
+        this.elemento.setAttribute('y1', y1);
+        this.elemento.setAttribute('x2', x2);
+        this.elemento.setAttribute('y2', y2);
+        this.elemento.setAttribute('stroke', colore);
+        this.elemento.setAttribute('stroke-width', width);
+        this.elemento.setAttribute('stroke-linecap', 'round'); // Estremità arrotondate
 
-		// Metodo per aggiungere la linea al DOM
-		aggiungiA(parent = document.body) {
-			// Crea contenitore SVG se necessario
-			if (!parent.querySelector('svg')) {
-				this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-				this.svg.style.position = 'fixed';
-				this.svg.style.top = '0';
-				this.svg.style.left = '0';
-				this.svg.style.width = '100%';
-				this.svg.style.height = '100%';
-				this.svg.style.pointerEvents = 'none';
-				parent.appendChild(this.svg);
-			} else {
-				this.svg = parent.querySelector('svg');
-			}
-			
-			this.svg.appendChild(this.elemento);
-			return this;
-		}
+        // Aggiungi transizione CSS
+        this.elemento.style.transition = 'stroke 0.5s ease';
+    }
 
-		// Metodi per modificare le proprietà
-		aggiornaPosizione(x1, y1, x2, y2) {
-			this.elemento.setAttribute('x1', x1);
-			this.elemento.setAttribute('y1', y1);
-			this.elemento.setAttribute('x2', x2);
-			this.elemento.setAttribute('y2', y2);
-		}
+    // Metodo per aggiungere la linea al DOM
+    aggiungiA(parent = document.body) {
+        // Crea contenitore SVG se necessario
+        if (!parent.querySelector('svg')) {
+            this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            this.svg.style.position = 'fixed';
+            this.svg.style.top = '0';
+            this.svg.style.left = '0';
+            this.svg.style.width = '100%';
+            this.svg.style.height = '100%';
+            this.svg.style.pointerEvents = 'none';
+            parent.appendChild(this.svg);
+        } else {
+            this.svg = parent.querySelector('svg');
+        }
+        
+        this.svg.appendChild(this.elemento);
+        return this;
+    }
 
-		aggiornaLarghezza(width) {
-			this.elemento.setAttribute('stroke-width', width);
-		}
+    // Metodi per modificare le proprietà
+    aggiornaPosizione(x1, y1, x2, y2) {
+        this.elemento.setAttribute('x1', x1);
+        this.elemento.setAttribute('y1', y1);
+        this.elemento.setAttribute('x2', x2);
+        this.elemento.setAttribute('y2', y2);
+    }
 
-		aggiornaColore(colore) {
-			this.elemento.setAttribute('stroke', colore);
-		}
-	}
-	
+    aggiornaLarghezza(width) {
+        this.elemento.setAttribute('stroke-width', width);
+    }
+
+    aggiornaColore(colore) {
+        this.elemento.setAttribute('stroke', colore);
+    }
+
+    // Nuovo metodo per cambiare colore con animazione
+    cambiaColoreConAnimazione(nuovoColore, durata = 500) {
+        this.elemento.style.transition = `stroke ${durata}ms ease`;
+        this.elemento.setAttribute('stroke', nuovoColore);
+    }
+
+    // Metodo per cambiare colore in modo intermittente
+    lampeggia(colori, intervallo = 500) {
+        if (this.lampeggioInterval) clearInterval(this.lampeggioInterval);
+
+        let index = 0;
+        this.lampeggioInterval = setInterval(() => {
+            this.aggiornaColore(colori[index]);
+            index = (index + 1) % colori.length;
+        }, intervallo);
+    }
+
+    // Metodo per fermare il lampeggio
+    fermaLampeggio() {
+        if (this.lampeggioInterval) {
+            clearInterval(this.lampeggioInterval);
+            this.lampeggioInterval = null;
+        }
+    }
+}
 	
 class LineaCurva {
     constructor(punti, color = '#ff00ff', spessore = 1) {
