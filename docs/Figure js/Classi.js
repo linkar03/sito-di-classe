@@ -1,5 +1,47 @@
 /* eslint-disable no-unused-vars */
 
+class Alert {
+  constructor(message, options = {}) {
+    this.message = message;
+    this.duration = options.duration || 2000; // Default 2 secondi
+    this.element = null;
+	this.backgroundColor = options.backgroundColor;
+  }
+
+  show() {
+    // Crea l'elemento alert
+    this.element = document.createElement('div');
+    this.element.innerHTML = this.message;
+    
+    // Stili base
+    Object.assign(this.element.style, {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      right: '0',
+      backgroundColor: this.backgroundColor,
+      color: 'white',
+      padding: '15px',
+      textAlign: 'center',
+      zIndex: '9999',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+    });
+
+    // Aggiungi alla pagina
+    document.body.appendChild(this.element);
+
+    // Rimuovi dopo il timeout
+    setTimeout(() => this.hide(), this.duration);
+  }
+
+  hide() {
+    if (this.element) {
+      document.body.removeChild(this.element);
+      this.element = null;
+    }
+  }
+}
+
 class TrackerMouse {
 		constructor() {
 			this.x = 0;
@@ -100,47 +142,6 @@ class LineaCurva {
 }
 
 
-
-
-const tracker = new TrackerMouse();
-
-// Anima una linea
-const x_linea_crescente = new LineaPersonalizzata(100, 100, 100, 100, 3, '#ffffff').aggiungiA();
-const x_linea_decrescente = new LineaPersonalizzata(100, 100, 100, 100, 3, '#ffffff').aggiungiA();
-
-function anima_linee() {
-
-	const coordinate = tracker.ottieniCoordinate();
-
-	x_linea_crescente.aggiornaPosizione(coordinate.x-10, coordinate.y-10, coordinate.x + 10 ,coordinate.y+10);
-	
-	x_linea_decrescente.aggiornaPosizione(coordinate.x-10, coordinate.y+10, coordinate.x + 10 ,coordinate.y-10);
-	
-	requestAnimationFrame(anima_linee);
-}
-
-function generaPuntiLatiDiversi() {
-        const lati = ['top', 'bottom', 'left', 'right'];
-        const latoStart = lati[Math.floor(Math.random() * 4)];
-        let latoEnd = lati[Math.floor(Math.random() * 4)];
-        
-        // Assicura che i lati siano diversi
-        while(latoEnd === latoStart) {
-            latoEnd = lati[Math.floor(Math.random() * 4)];
-        }
-
-        const getCoords = (lato) => {
-            switch(lato) {
-                case 'top': return {x: Math.random() * window.innerWidth/10 + window.innerWidth*8/10, y: 0};
-                case 'bottom': return {x: window.innerWidth/10 + Math.random() * window.innerWidth*8/10, y: window.innerHeight};
-                case 'left': return {x: 0, y: window.innerHeight/10 + Math.random() * window.innerHeight*8/10};
-                case 'right': return {x: window.innerWidth, y: window.innerHeight/10 + Math.random() * window.innerHeight*8/10};
-            }
-        };
-
-        return [getCoords(latoStart), getCoords(latoEnd)];
-    }
-	
 class LineaPericolosa extends LineaPersonalizzata {
     
 	constructor() {
