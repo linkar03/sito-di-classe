@@ -8,6 +8,7 @@
 	<!-- Per dispositivi Apple -->
     <title>Sito di classe</title>
 	
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="Figure js/Cubo.css">
 	<link rel="stylesheet" href="Figure js/Slide.css">
 	
@@ -46,24 +47,21 @@
 	
     <script>
 		
+		const MAX_CUBI = 10;
+		const PROBABILITA_GENERAZIONE = 0.002; // 0.25% per frame
+		
+		var sommacombo = 0;
+		var lastime = 300;
+			
 		Configurazione_del_livello();
         // Inizializzazione cubi
-        const cubeContainer = document.getElementById('cubeContainer');
-        const cubes = pages.map(config => new Cube({
-            name: config[0],
-            link: config[1],
-            image: config[2],
-            color: config[3],
-            size: config[4],
-            speedX: config[5],
-            speedY: config[6],
-			rotationSpeedX: config[7],
-            rotationSpeedY: config[8],
-            rotationX: 360,
-            rotationY: 360
-        }));
-
-        cubes.forEach(cube => cubeContainer.appendChild(cube.element));
+        generaTuttiCubi();
+		
+		function shouldSpawnCube() {
+				return Math.random() < PROBABILITA_GENERAZIONE && 
+					   cubes.length < MAX_CUBI &&
+					   stato_gioco === Stato.AVVIATO;
+			}
 	
         // Animazione
         function animate() {
@@ -83,7 +81,12 @@
 			
 			while( circlesDB.length <= 5 && (stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO))
 				initRandomCircles();
+				
+			if(shouldSpawnCube()) {
+				generaCuboCasuale();
+			}
 			
+		 lastime--;
 		 requestAnimationFrame(animate);
         }
 		
