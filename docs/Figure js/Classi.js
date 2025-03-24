@@ -277,6 +277,88 @@ class LineaPersonalizzata {
         }
     }
 }
+
+class TriangoloFluttuante {
+    constructor() {
+        this.element = document.createElement('div');
+        this.size = Math.random() * 50 + 30;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = (Math.random() - 0.5) * 2;
+        this.rotation = 0;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+        this.x = Math.random() * (window.innerWidth - this.size);
+        this.y = Math.random() * (window.innerHeight - this.size);
+
+        this.initStyles();
+        document.body.appendChild(this.element);
+        triangoliAttivi.push(this);
+    }
+
+    initStyles() {
+        Object.assign(this.element.style, {
+            position: 'fixed',
+            width: `${this.size}px`,
+            height: `${this.size}px`,
+            clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+            backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`,
+            transformOrigin: '50% 50%',
+            pointerEvents: 'none',
+            transition: 'transform 0.1s linear'
+        });
+    }
+
+    update() {
+        // Calcola distanza dal cursore
+        const mouseX = tracker.ottieniCoordinate().x;
+        const mouseY = tracker.ottieniCoordinate().y;
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distanza = Math.sqrt(dx * dx + dy * dy);
+
+        // Movimento verso il cursore se vicino (entro 200px)
+        if(distanza < 200) {
+            const angolo = Math.atan2(dy, dx);
+            this.speedX = Math.cos(angolo) * VELOCITA_TRIANGOLO * 100;
+            this.speedY = Math.sin(angolo) * VELOCITA_TRIANGOLO * 100;
+        } else {
+            // Movimento casuale con attrito
+            this.speedX *= 0.99;
+            this.speedY *= 0.99;
+        }
+
+        // Aggiorna posizione
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotationSpeed;
+
+        // Rimbalzo bordi
+        if(this.x <= 0 || this.x >= window.innerWidth - this.size) this.speedX *= -0.8;
+        if(this.y <= 0 || this.y >= window.innerHeight - this.size) this.speedY *= -0.8;
+
+        // Applica trasformazioni
+        this.element.style.transform = `
+            translate(${this.x}px, ${this.y}px)
+            rotate(${this.rotation}rad)
+        `;
+    }
+
+    distruggi() {
+        this.element.remove();
+        const index = triangoliAttivi.indexOf(this);
+        if(index !== -1) triangoliAttivi.splice(index, 1);
+    }
+}
+
+// Comandi globali
+function creaTriangolo() {
+    new TriangoloFluttuante();
+}
+
+function rimuoviTriangoli() {
+    triangoliAttivi.forEach(triangolo => triangolo.distruggi());
+    triangoliAttivi.length = 0;
+}
+
 	
 class LineaCurva {
     constructor(punti, color = '#ff00ff', spessore = 1) {
