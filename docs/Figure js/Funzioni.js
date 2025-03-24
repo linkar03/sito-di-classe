@@ -3,9 +3,9 @@
 
 
 
-function immortale(cursole_morte_)
+function immortale(stato_cursore)
 {
-	cursole_morte = cursole_morte_;
+	cursole_morte = stato_cursore;
 }
 
 function startgame()
@@ -20,6 +20,8 @@ function startgame()
 		
 		`, {duration: 3000, backgroundColor: '#ff4444' } );
 		myAlert.show();
+		
+		rimuoviTuttiCubi();
 		}
 		
 		generaLineePericolose();
@@ -43,14 +45,15 @@ function perso() {
         stato_gioco = Stato.PERSO;
     }
 	
+	rimuoviTuttiCubi();
 	document.body.style.backgroundColor = "red";
 	console.log("Game Ended");
 	para.updateContent(contents_perso[0]);
 	document.getElementById("punteggio").textContent = punteggio;
 	
-	circlesDB.forEach(circle => {
-		deleteCircle(circle.id," ");
-	});
+	while(circlesDB.length > 0) {
+        deleteCircle(circlesDB[0].id, "endgame");
+    }
 }
 
 //Logica quando scrolli
@@ -73,43 +76,89 @@ function anima_linee() {
 
 	const coordinate = tracker.ottieniCoordinate();
 	
-	if(!cursole_morte)
+	if(cursole_morte == 0)
 	{
 		x_linea_crescente.cambiaColoreConAnimazione('#bfbfbf', 1000);
 		x_linea_decrescente.cambiaColoreConAnimazione('#bfbfbf', 1000);
-		x_linea_crescente.aggiornaPosizione(coordinate.x-15, coordinate.y-15, coordinate.x + 15 ,coordinate.y+ 15);
-		x_linea_decrescente.aggiornaPosizione(coordinate.x-15, coordinate.y+15, coordinate.x +  15 ,coordinate.y- 15);
+		x_linea_crescente.aggiornaPosizione(coordinate.x-10, coordinate.y-10, coordinate.x + 10 ,coordinate.y+ 10);
+		x_linea_decrescente.aggiornaPosizione(coordinate.x-10, coordinate.y+10, coordinate.x +  10 ,coordinate.y- 10);
 	}
-	else
+	else if( cursole_morte == 1)
 	{
 		x_linea_crescente.cambiaColoreConAnimazione('#ffffff', 1000); 
 		x_linea_decrescente.cambiaColoreConAnimazione('#ffffff', 1000); 
 		x_linea_crescente.aggiornaPosizione(coordinate.x-5, coordinate.y-5, coordinate.x + 5 ,coordinate.y+5);
 		x_linea_decrescente.aggiornaPosizione(coordinate.x-5, coordinate.y+5, coordinate.x + 5 ,coordinate.y-5);
 	}
+	if( cursole_morte == 2)
+	{
+		x_linea_crescente.cambiaColoreConAnimazione('#ffae00', 1000); 
+		x_linea_decrescente.cambiaColoreConAnimazione('#ffae00', 1000); 
+		x_linea_crescente.aggiornaPosizione(coordinate.x-5, coordinate.y-5, coordinate.x + 5 ,coordinate.y+5);
+		x_linea_decrescente.aggiornaPosizione(coordinate.x-5, coordinate.y+5, coordinate.x + 5 ,coordinate.y-5);
+	}
 }
 
 function generaPuntiLatiDiversi() {
-        const lati = ['top', 'bottom', 'left', 'right'];
-        const latoStart = lati[Math.floor(Math.random() * 4)];
-        let latoEnd = lati[Math.floor(Math.random() * 4)];
-        
-        // Assicura che i lati siano diversi
+    const lati = ['top', 'bottom', 'left', 'right'];
+    const MIN_LUNGHEZZA = 100;
+    let start, end, latoStart, latoEnd;
+    let tentativi = 0;
+	
+	var dx;
+	var dy;
+	
+    do {
+        // Seleziona lati diversi
+        latoStart = lati[Math.floor(Math.random() * 4)];
+        latoEnd = lati[Math.floor(Math.random() * 4)];
         while(latoEnd === latoStart) {
             latoEnd = lati[Math.floor(Math.random() * 4)];
         }
 
+        // Genera coordinate con posizioni casuali sui lati
         const getCoords = (lato) => {
+            const rangeMin = MIN_LUNGHEZZA;
+            const rangeMax = lato === 'top' || lato === 'bottom' ? 
+                window.innerWidth - MIN_LUNGHEZZA : 
+                window.innerHeight - MIN_LUNGHEZZA;
+
             switch(lato) {
-                case 'top': return {x: Math.random() * window.innerWidth/10 + window.innerWidth*8/10, y: 0};
-                case 'bottom': return {x: window.innerWidth/10 + Math.random() * window.innerWidth*8/10, y: window.innerHeight};
-                case 'left': return {x: 0, y: window.innerHeight/10 + Math.random() * window.innerHeight*8/10};
-                case 'right': return {x: window.innerWidth, y: window.innerHeight/10 + Math.random() * window.innerHeight*8/10};
+                case 'top': 
+                    return {
+                        x: Math.random() * (window.innerWidth - rangeMin) + rangeMin/2,
+                        y: 0
+                    };
+                case 'bottom': 
+                    return {
+                        x: Math.random() * (window.innerWidth - rangeMin) + rangeMin/2,
+                        y: window.innerHeight
+                    };
+                case 'left': 
+                    return {
+                        x: 0,
+                        y: Math.random() * (window.innerHeight - rangeMin) + rangeMin/2
+                    };
+                case 'right': 
+                    return {
+                        x: window.innerWidth,
+                        y: Math.random() * (window.innerHeight - rangeMin) + rangeMin/2
+                    };
             }
         };
 
-        return [getCoords(latoStart), getCoords(latoEnd)];
-    }
+        start = getCoords(latoStart);
+        end = getCoords(latoEnd);
+
+        // Calcola distanza
+        dx = end.x - start.x;
+        dy = end.y - start.y;
+        tentativi++;
+
+    } while ((Math.sqrt(dx*dx + dy*dy) < MIN_LUNGHEZZA) && tentativi < 100);
+
+    return [start, end];
+}
 	
 
 function Configurazione_del_livello()
@@ -282,7 +331,7 @@ function createCircle(name, xStart, yStart, xCenter, yCenter, step) {
 function deleteCircle(id, evento) {
     const index = circlesDB.findIndex(c => c.id === id);
     
-    if(evento == " ") {
+    if(evento == "endgame") {
         if(index !== -1) {
             circlesDB[index].element.remove();
             circlesDB.splice(index, 1);
@@ -306,19 +355,39 @@ function deleteCircle(id, evento) {
             });
             return foundValid;
         };
-
+	
+		
+		
         if(evento == "vita") {
             hasEvents = processEvents(circle.config.onDie);
         }
 		
         else if(evento == "click") {
+			sommacombo++;
+			lastime = 25;
             hasEvents = processEvents(circle.config.onDelete);
+			
         }
 		
 		else if(evento == "esplosione") {
+			sommacombo++;
+			lastime = 25;
             hasEvents = processEvents(circle.config.onExplosion);
         }
-
+			
+		if(lastime < 0)
+			sommacombo = 0;
+		
+		if(evento != "vita")
+		{
+			if( sommacombo >= 100)
+				new Message_Screen(sommacombo+" IPER COMBO!", {fontSize: 40,duration: 1000}).show()
+			else if( sommacombo >= 25)
+				new Message_Screen(sommacombo+" ULTRA COMBO!", {fontSize: 25,duration: 1000}).show()
+			else if( sommacombo >= 5)
+				new Message_Screen(sommacombo+" COMBO!", {fontSize: 20,duration: 1000}).show()
+		}
+		
         // Rimozione solo se nessun evento è stato processato
         //if(!hasEvents) {
             circle.element.remove();

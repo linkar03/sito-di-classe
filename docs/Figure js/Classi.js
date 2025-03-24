@@ -1,11 +1,138 @@
 /* eslint-disable no-unused-vars */
+// tracker.ottieniCoordinate().x
+
+
+
+
+class Message_Screen {
+    static activeMessages = [];
+    
+    constructor(text, options = {}) {
+        this.text = text;
+        this.duration = options.duration || 2000;
+        this.fontSize = options.fontSize || 28;
+        this.color = this.getRandomArcadeColor();
+        this.element = null;
+        this.rect = null;
+        this.createMessage();
+    }
+
+    getRandomArcadeColor() {
+        const colors = [
+            '#FF0000', '#00FF00', '#FFFF00', 
+            '#FF00FF', '#00FFFF', '#FF8000'
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    createMessage() {
+        // Crea elemento temporaneo per il calcolo delle dimensioni
+        const temp = document.createElement('div');
+        temp.style.cssText = `
+            position: absolute;
+            visibility: hidden;
+            font-family: 'Press Start 2P', cursive;
+            font-size: ${this.fontSize}px;
+            white-space: nowrap;
+        `;
+        temp.textContent = this.text;
+        document.body.appendChild(temp);
+        
+        // Calcola dimensioni reali
+        const rect = temp.getBoundingClientRect();
+        this.rect = {
+            width: rect.width,
+            height: rect.height
+        };
+        document.body.removeChild(temp);
+
+        // Posizione iniziale
+        const mouseX = window.mouseX || tracker.ottieniCoordinate().x;
+        const mouseY = window.mouseY || tracker.ottieniCoordinate().y;
+        this.x = mouseX - this.rect.width/2;
+        this.y = mouseY - 20;
+
+        // Controlla sovrapposizioni e regola posizione
+        this.adjustPosition();
+
+        // Crea elemento finale
+        this.element = document.createElement('div');
+        this.element.textContent = this.text;
+        
+        Object.assign(this.element.style, {
+            position: 'fixed',
+            fontFamily: '"Press Start 2P", cursive',
+            fontSize: `${this.fontSize}px`,
+            color: this.color,
+            textShadow: '3px 3px #000',
+            pointerEvents: 'none',
+            zIndex: '99999',
+            left: `${this.x}px`,
+            top: `${this.y}px`,
+            transition: 'opacity 0.4s ease',
+            opacity: '1'
+        });
+
+        Message_Screen.activeMessages.push(this);
+    }
+
+    adjustPosition() {
+        const padding = 10;
+        let collision = true;
+        let attempts = 0;
+
+        while(collision && attempts < 10) {
+            collision = false;
+            
+            for(const msg of Message_Screen.activeMessages) {
+                const horizontalOverlap = 
+                    this.x < msg.x + msg.rect.width && 
+                    this.x + this.rect.width > msg.x;
+                    
+                const verticalOverlap = 
+                    this.y < msg.y + msg.rect.height + padding && 
+                    this.y + this.rect.height > msg.y;
+
+                if(horizontalOverlap && verticalOverlap) {
+                    this.y = msg.y + msg.rect.height + padding;
+                    collision = true;
+                    break;
+                }
+            }
+            attempts++;
+        }
+    }
+
+    show() {
+        document.body.appendChild(this.element);
+        
+        setTimeout(() => {
+            this.element.style.opacity = '0';
+        }, this.duration - 500);
+
+        setTimeout(() => this.destroy(), this.duration);
+    }
+
+    destroy() {
+        if(this.element) {
+            this.element.remove();
+            Message_Screen.activeMessages = 
+                Message_Screen.activeMessages.filter(msg => msg !== this);
+        }
+    }
+}
+
+
+
+
 
 class Alert {
   constructor(message, options = {}) {
     this.message = message;
     this.duration = options.duration || 2000; // Default 2 secondi
     this.element = null;
-	this.backgroundColor = options.backgroundColor;
+    this.backgroundColor = options.backgroundColor || '#333'; // Colore di default
+    this.padding = options.padding || '15px 25px'; // Padding personalizzabile
   }
 
   show() {
@@ -13,18 +140,24 @@ class Alert {
     this.element = document.createElement('div');
     this.element.innerHTML = this.message;
     
-    // Stili base
+    // Stili ottimizzati
     Object.assign(this.element.style, {
       position: 'fixed',
-      top: '0',
-      left: '0',
-      right: '0',
+      top: '20px',
+      left: '50%',
+      transform: 'translateX(-50%)',
       backgroundColor: this.backgroundColor,
       color: 'white',
-      padding: '15px',
+      padding: this.padding,
       textAlign: 'center',
       zIndex: '9999',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+      boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
+      borderRadius: '8px',
+      fontSize: '11px',
+      display: 'inline-block',
+      maxWidth: '90%',
+      wordBreak: 'break-word',
+      lineHeight: '1.4'
     });
 
     // Aggiungi alla pagina
@@ -41,6 +174,7 @@ class Alert {
     }
   }
 }
+
 
 class TrackerMouse {
 		constructor() {
@@ -208,4 +342,29 @@ class LineaPericolosa extends LineaPersonalizzata {
 			this.attiva = false;
         }, 1000);
     }
+}
+
+
+function generaTuttiCubi() {
+    pages.forEach(page => {
+        const cube = new Cube({
+            name: page[0],
+            link: page[1],
+            image: page[2],
+            color: page[3],
+            size: getRandomFloat(dimensione_min, dimensione_max),
+            speedX: getRandomFloat(velocita_min_x, velocita_max_x),
+            speedY: getRandomFloat(velocita_min_y, velocita_max_y),
+            rotationSpeedX: getRandomFloat(velocita_rotazione_min_x, velocita_rotazione_max_x),
+            rotationSpeedY: getRandomFloat(velocita_rotazione_min_y, velocita_rotazione_max_y)
+        });
+        cubes.push(cube);
+        document.getElementById('cubeContainer').appendChild(cube.element);
+    });
+}
+
+// Rimuovi tutti i cubi
+function rimuoviTuttiCubi() {
+    cubes.forEach(cube => cube.element.remove());
+    cubes.length = 0;
 }

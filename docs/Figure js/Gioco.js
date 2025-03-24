@@ -14,34 +14,34 @@ var max_level = 1;
 var livello = 1;
 
 var livelli = [
- -1,100,250,500,1000,2000,3000,4000,5000,7500,100000
+ -1,250,500,1000,2000,3000,5000,10000,15000,25000,10000000
 ]
 
-var cursole_morte = true;
+var cursole_morte = 1;
 
 const configurazione = [
   // Livello 1
   [
-    1,   // linee_rosse (aumenta progressivamente)
-    5000, // tempo_linee (diminuisce)
+    1,   // Linee rosse
+    4000, // Tempo tra le linee (ms)
     [
-      ["rosso", 50],
-      ["giallo", 100],
-      ["verde", 20],
-      ["azzurro", 85],
-      ["viola", 5],   // Rarissimo
-      ["grigio", 5]   // Rarissimo
+      ["giallo", 400],    // 40% - Comune
+      ["verde", 350],     // 35% - Comune
+      ["azzurro", 150],   // 15% - Non comune
+      ["arancione", 80],  // 8% - Raro
+      ["viola", 10],      // 1% - Rarissimo
+      ["grigio", 10]      // 1% - Rarissimo
     ]
   ],
   // Livello 2
   [
     3,
-    4000,
+    3500,
     [
-      ["rosso", 40],
-      ["giallo", 90],
-      ["verde", 30],
-      ["azzurro", 80],
+      ["giallo", 350],
+      ["verde", 300],
+      ["azzurro", 200],
+      ["arancione", 120],
       ["viola", 15],
       ["grigio", 15]
     ]
@@ -49,12 +49,12 @@ const configurazione = [
   // Livello 3
   [
     5,
-    3000,
+    2000,
     [
-      ["rosso", 30],
-      ["giallo", 80],
-      ["verde", 40],
-      ["azzurro", 70],
+      ["giallo", 300],
+      ["verde", 250],
+      ["azzurro", 250],
+      ["arancione", 150],
       ["viola", 25],
       ["grigio", 25]
     ]
@@ -62,82 +62,88 @@ const configurazione = [
   // Livello 4
   [
     7,
-    2500,
+    1000,
     [
-      ["rosso", 20],
-      ["giallo", 70],
-      ["verde", 50],
-      ["azzurro", 60],
+      ["giallo", 250],
+      ["verde", 200],
+      ["azzurro", 300],
+      ["arancione", 200],
       ["viola", 35],
       ["grigio", 35]
     ]
   ],
   // Livello 5
   [
-    8,
-    2000,
+    9,
+    800,
     [
-      ["rosso", 10],
-      ["giallo", 60],
-      ["verde", 60],
-      ["azzurro", 50],
+      ["giallo", 200],
+      ["verde", 150],
+      ["azzurro", 350],
+      ["arancione", 250],
       ["viola", 50],
       ["grigio", 50]
     ]
   ],
   // Livello 6
   [
-    10,
-    1500,
+    11,
+    600,
     [
-      ["rosso", 5],
-      ["giallo", 50],
-      ["verde", 70],
-      ["azzurro", 40],
+      ["giallo", 150],
+      ["verde", 100],
+      ["azzurro", 400],
+      ["arancione", 300],
       ["viola", 70],
       ["grigio", 70]
     ]
   ],
   // Livello 7
   [
-    12,
-    1200,
-    [
-      ["giallo", 40],
-      ["verde", 80],
-      ["azzurro", 30],
-      ["viola", 90],
-      ["grigio", 90]
-    ]
-  ],
-  // Livello 8
-  [
     13,
-    1000,
+    500,
     [
-      ["verde", 90],
-      ["azzurro", 20],
+      ["giallo", 100],
+      ["verde", 50],
+      ["azzurro", 450],
+      ["arancione", 350],
       ["viola", 100],
       ["grigio", 100]
     ]
   ],
+  // Livello 8
+  [
+    15,
+    300,
+    [
+      ["giallo", 50],
+      ["verde", 30],
+      ["azzurro", 500],
+      ["arancione", 400],
+      ["viola", 150],
+      ["grigio", 150]
+    ]
+  ],
   // Livello 9
   [
-    14,
-    800,
+    17,
+    200,
     [
-      ["azzurro", 10],
-      ["viola", 120],
-      ["grigio", 120]
+      ["azzurro", 550],
+      ["arancione", 450],
+      ["viola", 200],
+      ["grigio", 200]
     ]
   ],
   // Livello 10
   [
-    15,
-    500,
+    20,
+    100,
     [
-      ["viola", 150],
-      ["grigio", 150]
+      ["azzurro", 600],
+      ["arancione", 500],
+      ["viola", 300],
+      ["grigio", 300]
     ]
   ]
 ];
@@ -148,7 +154,8 @@ var probabilita = [
 	["verde", 20],
 	["azzurro", 20],
 	["viola", 20],
-	["grigio", 100]
+	["grigio", 100],
+	["arancione", 1000]
 ];
 
 var linee_rosse = 0;
@@ -277,10 +284,21 @@ const cerchiConfig = {
         points: 5,
         //onCreated: "aggiungi_punti",
 		onGoing: "movimentoSpeciale",
-        onDelete: "bonus,shake,temporale",
+        onDelete: "bonus,immortale_laser",
 		onDie: "penalita",
 		onExplosion: "bonus",
 		lifespan: 100
+    },
+	
+	"arancione": {
+        color: "#F75E25",
+        points: 100,
+        //onCreated: "aggiungi_punti",
+		onGoing: "movimentoSpeciale",
+        onDelete: "bonus,distruggi_cubi",
+		onDie: "",
+		onExplosion: "bonus",
+		lifespan: 10
     }
 };
 
@@ -291,10 +309,12 @@ const eventiPersonalizzati = {
         document.getElementById("punteggio").textContent = punteggio;
 		checklivello();
 		document.getElementById("livello").textContent = livello;
+		new Message_Screen(circle.points , {fontSize: 20,duration: 1000}).show();
     },
     
     // Eventi OnDelete
     penalita: function(circle) {
+		lastime = -1;
         punteggio -= circle.points * 2;
         document.getElementById("punteggio").textContent = punteggio;
 		checklivello();
@@ -302,6 +322,8 @@ const eventiPersonalizzati = {
         circle.element.style.transform = 'scale(1.5)';
 		circle.element.style.opacity = '0.5';
         setTimeout(() => circle.element.remove(), 300);
+		
+		new Message_Screen(-circle.points * 2 , {fontSize: 20,duration: 1000}).show();
     },
     
     bonus: function(circle) {
@@ -312,6 +334,8 @@ const eventiPersonalizzati = {
         circle.element.style.transform = 'scale(0.5)';
         circle.element.style.opacity = '0.5';
         setTimeout(() => circle.element.remove(), 500);
+		
+		new Message_Screen(circle.points , {fontSize: 20,duration: 1000}).show();
     },
 	
 	 movimentoSpeciale: function(circle) {
@@ -355,47 +379,49 @@ const eventiPersonalizzati = {
 	
 	
 	esplosione: function(circle) {
-        // Fase 1: Animazione visiva
         const explosionData = {
             startTime: Date.now(),
             element: document.createElement('div'),
             completed: false
         };
 
-        // Crea cerchio rosso animato
+        // Modifica lo stile per l'effetto visivo
         explosionData.element.style.cssText = `
             position: fixed;
             left: ${circle.xCenter}px;
             top: ${circle.yCenter}px;
             width: 0;
             height: 0;
-            border: 2px solid rgba(255, 0, 0, 0.5);
-            border-radius: 50%;
+            border: 25px solid rgba(255, 165, 0, 0.3); // Arancione trasparente
+            border-radius: 100%;
             transform: translate(-50%, -50%);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            z-index: 9999;
+            z-index: 9998;
+            box-shadow: 0 0 30px rgba(255, 165, 0, 0.2);
+            background-color: rgba(255, 165, 0, 0.1);
         `;
+
         document.body.appendChild(explosionData.element);
 
-        // Avvia animazione
+        // Animazione più evidente
         requestAnimationFrame(() => {
-            explosionData.element.style.width = '2000px';
-            explosionData.element.style.height = '2000px';
-            explosionData.element.style.opacity = '1';
+            explosionData.element.style.width = '400px';
+            explosionData.element.style.height = '400px';
+            explosionData.element.style.opacity = '0.8';
         });
 
         // Fase 2: Distruzione ritardata
         const checkExplosion = () => {
             if(!explosionData.completed) {
-                const progress = (Date.now() - explosionData.startTime)/500;
+                const progress = (Date.now() - explosionData.startTime)/300;
                 
                 if(progress >= 1) {
                     // Distruggi cerchi nel raggio
                     circlesDB.forEach(c => {
                         const dx = c.xCenter - circle.xCenter;
                         const dy = c.yCenter - circle.yCenter;
-                        if( Math.sqrt(dx**2 + dy**2) < 2000 ) {
+                        if( Math.sqrt(dx**2 + dy**2) < 400 ) {
                             deleteCircle(c.id, "esplosione");
                         }
                     });
@@ -413,11 +439,20 @@ const eventiPersonalizzati = {
     },
 	
 
-	temporale: function(circle) {
+	immortale_laser: function(circle) {
         
-		immortale(false);
+		immortale(0);
 		// Variabile globale da modificare
-        setTimeout(() => immortale(true) , 2500);
+        setTimeout(() => immortale(1) , 5000);
+            
+	},
+	
+	
+	distruggi_cubi: function(circle) {
+        
+		immortale(2);
+		// Variabile globale da modificare
+        setTimeout(() => immortale(1) , 5000);
             
 	}
 	 
