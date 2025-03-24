@@ -46,7 +46,10 @@
 	
 	
     <script>
-		
+	
+		const triangoliAttivi = [];
+	
+		const VELOCITA_TRIANGOLO = 0.1;
 		const MAX_CUBI = 10;
 		const PROBABILITA_GENERAZIONE = 0.002; // 0.25% per frame
 		
@@ -56,7 +59,8 @@
 		Configurazione_del_livello();
         // Inizializzazione cubi
         generaTuttiCubi();
-		
+		for(let i = 0; i < 25; i++) creaTriangolo();
+
 		function shouldSpawnCube() {
 				return Math.random() < PROBABILITA_GENERAZIONE && 
 					   cubes.length < MAX_CUBI &&
@@ -68,7 +72,7 @@
 			
 			if( stato_gioco != Stato.PAUSA )
 				{
-				
+				triangoliAttivi.forEach(triangolo => triangolo.update());
 				checkCollisionWithLines();
 				cubes.forEach(cube => cube.update());
 				if( stato_gioco != Stato.MENU && stato_gioco != Stato.PERSO)
