@@ -58,11 +58,49 @@ img {
     width: 10%; 
     height: 5%; 
 }
+/* First, keep your existing container style */
+.container {
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    align-content: center;
+}
+
+
+/* Or if you want it to spin constantly, add directly to container */
+.container {
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    align-content: center;
+    opacity: 0,5;
+}
+
+/* Keep your existing keyframes */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.spinner {
+    animation: spin 6s linear infinite;
+}
     </style>
     </head>
 <body>
     <ul>
-        <li><a class="active" href="#home">Home</a></li>
+        <li><a class="active" href="Giada.html">Home</a></li>
         <li><a href="#news">Contatti</a></li>
       </ul>
 
@@ -70,5 +108,22 @@ img {
       <div class="header">
         <h1>Giada's Web Page </h1>
       </div>
+
+      <div class="container">
+        <div class="spinner">
+            <pre>
+              /^-^\         /^-----^\
+              / o o \        V  o o  V
+             /   Y   \        |  Y  |
+             V \ v / V         \ Q /
+               / - \           / - \
+              /    |           |    \
+        (    /     |           |     \     )
+         ===/___) ||           || (___\====
+            </pre>
+        </div>
+    </div>
+    
+    
 </body>
 </html>
