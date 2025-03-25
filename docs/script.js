@@ -136,6 +136,18 @@ const pages = [
 		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
     
     ],
+    [
+        "Laert", 
+        dr_pagine + "Laert/Laert.html",
+        dr_risorse + "",
+        getRandomColor(),
+        0, 
+        getRandomFloat(velocita_min_x,velocita_max_x), 
+        getRandomFloat(velocita_min_x,velocita_max_y),
+		getRandomFloat(velocita_rotazione_min_x,velocita_rotazione_max_x),
+		getRandomFloat(velocita_rotazione_min_y,velocita_rotazione_max_y),
+    
+    ],
 ];
 
 const numero_cubi = pages.length;
@@ -144,7 +156,6 @@ const step_dimensione = (dimensione_max - dimensione_min) / (numero_cubi - 1);
 pages.forEach((page, index) => {
     page[4] = dimensione_min + step_dimensione * index;
 });
-
 
 const contents = [
         '<div class="content"><h1>Benvenuto nel sito</h1></div>',

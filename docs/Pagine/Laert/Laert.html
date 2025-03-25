@@ -1,73 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Page</title>
+    <title>PaGiNa Webssss</title>
     <style>
-        /* Base styles remain the same */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
-
-        body {
+         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             font-family: Arial, sans-serif;
             line-height: 1.6;
+            background-image: url(irvan-smith-5eBW5GomfhY-unsplash.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover; 
+            background-attachment: fixed;
         }
-
-        /* Enhanced Header Styles */
         header {
             background-color: #333;
             color: white;
             padding: 2rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            position: relative; 
         }
-
-        /* Main title animation */
         .animated-title {
             animation: slideIn 1s ease-out,
-                       glow 2s ease-in-out infinite;
+                       glow 3s ease-in-out infinite;
             margin: 0;
         }
-
-        /* Subtitle styles and animation */
-        .subtitle {
-            opacity: 0;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            animation: fadeIn 0.5s ease-out forwards;
-            animation-delay: 1s;
-        }
-
-        /* Decorative elements */
-        .decoration {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-        }
-
-        .decoration:nth-child(1) {
-            top: 20%;
-            left: 20%;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .decoration:nth-child(2) {
-            top: 60%;
-            right: 20%;
-            animation: float 3s ease-in-out infinite reverse;
-        }
-
-        /* Keyframe Animations */
         @keyframes slideIn {
             0% {
                 transform: translateY(-100%) scale(0.5);
@@ -78,16 +44,33 @@
                 opacity: 1;
             }
         }
-
         @keyframes glow {
-            0%, 100% {
-                text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            0% {
+                text-shadow: 0 0 10px rgba(228, 241, 143, 1),
+                            0 0 20px rgba(228, 241, 143, 0.8),
+                            0 0 30px rgba(228, 241, 143, 0.6);
+            }
+            25% {
+                text-shadow: 0 0 20px rgba(255, 105, 180, 1),
+                            0 0 40px rgba(255, 105, 180, 0.8),
+                            0 0 60px rgba(255, 105, 180, 0.6);
             }
             50% {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                text-shadow: 0 0 20px rgba(0, 191, 255, 1),
+                            0 0 40px rgba(0, 191, 255, 0.8),
+                            0 0 60px rgba(0, 191, 255, 0.6);
+            }
+            75% {
+                text-shadow: 0 0 20px rgba(50, 205, 50, 1),
+                            0 0 40px rgba(50, 205, 50, 0.8),
+                            0 0 60px rgba(50, 205, 50, 0.6);
+            }
+            100% {
+                text-shadow: 0 0 10px rgb(245, 117, 5),
+                            0 0 20px rgba(234, 159, 38, 0.8),
+                            0 0 30px rgba(239, 255, 19, 0.6);
             }
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -98,80 +81,88 @@
                 transform: translateY(0);
             }
         }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0);
-            }
-            50% {
-                transform: translate(15px, -15px);
-            }
-        }
-
-        /* Interactive hover effect */
-        .animated-title {
-            transition: transform 0.3s ease;
-        }
-
-        .animated-title:hover {
-            transform: scale(1.1);
-            cursor: pointer;
-        }
-
-        /* Rest of your existing styles */
         .container {
             flex: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;  
+            padding: 100px;
+            align-items: center;  
+            justify-content: center;
+            background-color: rgb(255, 255, 255);
+            opacity: 88%;
+            width: 100%;
+             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-
         .section {
             margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
         footer {
             background-color: #333;
             color: white;
             text-align: center;
             padding: 20px;
+        }
+        .ascii-spinner {
+            font-family: monospace;
+            font-size: 24px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            white-space: pre;
+            margin: 20px;
+        }
+        .ascii-spinner {  
+        animation: spin 6s linear infinite;
+        }
+            .image-container {
+            position: relative;
             width: 100%;
+            text-align: center;
+        }
+        .image-container img {
+            width: 150px;  
+            height: auto;
+            margin: auto;
+            display: block;
         }
     </style>
 </head>
 <body>
+    <div>
     <header>
-        <div class="decoration"></div>
-        <div class="decoration"></div>
-        <h1 class="animated-title">Welcome to My Personal Page</h1>
-        <p class="subtitle">Creating Something Amazing</p>
+        <h1 class="animated-title">Benvenuti nella pagina web di Laert</h1>
     </header>
-
-    <!-- Rest of your content remains the same -->
-    <div class="container">
-        <div class="section">
-            <h2>About Me</h2>
-            <p>Write your introduction here. Share some information about yourself, your interests, and your goals.</p>
+   </div>
+   <div class="container">
+    <div class="section">
+        <div class="image-container ascii-spinner">
+            <img src="pingu.png" alt="Pingu">
         </div>
-
-        <div class="section">
-            <h2>My Skills</h2>
-            <ul>
-                <li>Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Contact Information</h2>
-            <p>Email: your.email@example.com</p>
-            <p>Location: Your City, Country</p>
+        <div>
+            <h2></h2>
         </div>
     </div>
-
+</div>
     <footer>
-        <p>&copy; 2024 My Personal Page. All rights reserved.</p>
+        <p class="animated-title">&copy; 2024 Qualche diritto riservato!</p>
     </footer>
+    <script>
+       
+    </script>
 </body>
 </html>
